@@ -50,9 +50,19 @@ router.get(
       const { user } = req;
       if (user) {
         return res.json({
-          user: user.toSafeObject()
+        //   user: user.toSafeObject()
+        user: {
+            id,
+            firstName,
+            lastName,
+            email,
+            userName
+        }
         });
-      } else return res.json({ user: null });
+      } else return res.json(
+        {
+            user: null
+        });
     }
   );
 
@@ -90,7 +100,14 @@ router.post(
       await setTokenCookie(res, user);
 
       return res.json({
-        user: user
+        // user: user
+        user: {
+            id,
+            firstName,
+            lastName,
+            email,
+            userName
+        }
       });
     }
   );
