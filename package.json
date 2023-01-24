@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/13illydakid/project-api#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "express-validator": "^6.14.3"
   }
 }
