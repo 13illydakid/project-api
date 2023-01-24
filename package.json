@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/13illydakid/project-api/issues"
   },
-  "homepage": "https://github.com/13illydakid/project-api#readme"
+  "homepage": "https://github.com/13illydakid/project-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  }
 }
