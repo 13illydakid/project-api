@@ -1,5 +1,6 @@
-    #!/usr/bin/env node
-// backend/bin/www
+#!/usr/bin/env node
+
+    // backend/bin/www
 
 // Import environment variables
 require('dotenv').config();
