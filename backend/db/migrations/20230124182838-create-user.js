@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
+
+// const { sequelize } = require("../models");
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -6,8 +8,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Users", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("Users", {
+      firstName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      lastName: {
+        type: sequelize.STRING,
+        allowNull: false
+      },
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -40,8 +50,8 @@ module.exports = {
       }
     }, options);
   },
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     options.tableName = "Users";
-    return queryInterface.dropTable(options);
+    await queryInterface.dropTable(options);
   }
 };
