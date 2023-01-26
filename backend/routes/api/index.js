@@ -1,6 +1,13 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
+
 const usersRouter = require('./users.js');
+const bookingsRouter = require('./bookings.js');
+const reviewsRouter = require('./reviews.js');
+const imageReviewsRouter = require('./image-reviews.js');
+const spotsRouter = require('./spots.js');
+const imageSpotsRouter = require('./image-spots.js');
+
 const { restoreUser } = require("../../utils/auth.js");
 
 // Connect restoreUser middleware to the API router
