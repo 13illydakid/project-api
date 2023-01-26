@@ -11,11 +11,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Users", {
       firstName: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(256),
         allowNull: false
       },
       lastName: {
-        type: sequelize.STRING,
+        type: sequelize.STRING(256),
         allowNull: false
       },
       id: {
