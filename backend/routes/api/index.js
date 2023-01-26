@@ -18,6 +18,12 @@ router.use(restoreUser);
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
+router.use('/bookings', bookingsRouter);
+router.use('/reviews', reviewsRouter);
+router.use('/imageReviews', imageReviewsRouter);
+router.use('/spots', spotsRouter);
+router.use('/imageSpots', imageSpotsRouter);
+
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
