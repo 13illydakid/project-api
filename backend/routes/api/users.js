@@ -1,13 +1,20 @@
 const express = require('express');
-const router = express.Router();
-
+// const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const router = express.Router();
+
     const validateSignup = [
+        check('firstName')
+          .exists({checkFalsy: true})
+          .withMessage('Please enter your firstName'),
+        check('lastName')
+          .exists({checkFalsy: true})
+          .withMessage('Please enter your lastName'),
         check('email')
           .exists({ checkFalsy: true })
           .isEmail()
@@ -32,8 +39,27 @@ router.post(
     '/',
     validateSignup,
     async (req, res) => {
-      const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+      const { firstName, lastName, email, password, username } = req.body;
+
+      let isUserNameTaken = await User.findOne({
+        where: { username: username }
+      });
+      if(isUserNameTaken){
+        // res.status(403);
+        return res.json({
+          statusCode: 403,
+          message: 'username is not available, please choose another',
+          errors: [
+            ''
+          ]
+        })
+      }
+      let emailChecker = await User.findOne({
+        where: { email: email }
+      });
+
+
+      const user = await User.signup({ firstName, lastName, email, username, password });
 
       await setTokenCookie(res, user);
 

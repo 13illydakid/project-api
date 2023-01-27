@@ -2,6 +2,7 @@
 
 // /** @type {import('sequelize-cli').Migration} */
 
+
 const bcrypt = require("bcryptjs");
 
 let options = {};
@@ -9,10 +10,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-options.tableName = 'imageSpots';
+options.tableName = 'ReviewImages';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert(
       options,
       [
@@ -34,7 +35,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: {
+        reviewId: {
           [Op.in]: ['']
         },
       }
