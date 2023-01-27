@@ -2,6 +2,10 @@
 <!-- # Enter avg.BnB -->
 <!-- # Introducing avg.BnB -->
 # Welcome to avg.BnB
+# Featuring avg.BnB
+# Presenting avg.BnB
+# remote.BnB
+# 323.BnB
 <!-- # About avg.BnB -->
 <!-- # AVG.BnB Clone
 # Avg.BnB Clone -->
