@@ -1,7 +1,8 @@
 # project-api
-# avg.BnB Clone
-# AVG.BnB Clone
-# Avg.BnB Clone
+<!-- # Enter avg.BnB -->
+# Introducing avg.BnB
+<!-- # AVG.BnB Clone
+# Avg.BnB Clone -->
 
 ## Database Schema Design
 
