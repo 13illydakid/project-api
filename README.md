@@ -1,5 +1,7 @@
 # project-api
-# AirBnB Clone
+# avg.BnB Clone
+# AVG.BnB Clone
+# Avg.BnB Clone
 
 ## Database Schema Design
 
