@@ -1,6 +1,8 @@
 # project-api
 <!-- # Enter avg.BnB -->
-# Introducing avg.BnB
+<!-- # Introducing avg.BnB -->
+# Welcome to avg.BnB
+<!-- # About avg.BnB -->
 <!-- # AVG.BnB Clone
 # Avg.BnB Clone -->
 
