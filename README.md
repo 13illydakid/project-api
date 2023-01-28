@@ -1,9 +1,9 @@
 # project-api
 <!-- # Enter avg.BnB -->
 <!-- # Introducing avg.BnB -->
-# Welcome to avg.BnB
+<!-- # Welcome to avg.BnB -->
 # Welcome to urAvg.BnB
-# Welcome to uravg.BnB
+<!-- # Welcome to uravg.BnB -->
 <!-- # Welcome to wd40.BnB -->
 
 <!-- # Featuring avg.BnB
