@@ -19,19 +19,19 @@ module.exports = {
         {
           spotId: 1,
           userId: 3,
-          review: '',
+          review: 'What a lovely home!',
           stars: 5
         },
         {
           spotId: 2,
           userId: 1,
-          review: '',
+          review: 'Strange that I have to wear an armband but the place is okay.',
           stars: 4
         },
         {
           spotId: 3,
           userId: 2,
-          review: '',
+          review: 'Kinda noisy outside, like as if people are fighting titans, great castle though!',
           stars: 4
         },
       ], {});
