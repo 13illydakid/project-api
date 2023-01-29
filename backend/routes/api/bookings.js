@@ -49,12 +49,18 @@ router.get('/current', requireAuth, async(req, res) => {
 //edit a booking
 router.put('/:bookingId', requireAuth, async(req, res) => {
     const { startDate, endDate } = req.body;
+    const starting = new Date(startDate);
+    const ending = new Date(endDate);
+
+    const { bookingId } = req.params;
+    const { user } = req;
 
     const selectBooking = await Booking.findOne({
         where: {
-            id: bookingId,
+            id: bookingId
         }
     });
+    //Error if Booking is not found
     if(!selectBooking){
         res.status(404);
         return res.json({
@@ -62,4 +68,15 @@ router.put('/:bookingId', requireAuth, async(req, res) => {
             statusCode: 404,
         });
     }
-})
+    //User does not have the correct authorization
+    if(selectBooking.userId !== user.Id){
+        res.status(403);
+        return res.json({
+            message: "Forbidden",
+            statusCode: 403
+        });
+    }
+
+
+    
+});
