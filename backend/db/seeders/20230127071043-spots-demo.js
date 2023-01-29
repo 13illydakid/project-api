@@ -25,7 +25,7 @@ module.exports = {
           lat: 157.8581,
           lng: 21.3099,
           name: 'Residence of Eren Yeager',
-          description: '',
+          description: 'Located inside is a basement that is believed to contain the secrets and truth of the titans that have decimated humanity, resulting in the surviving population sheltering behind the walls of Paradis.',
           price: 845
         },
         {
@@ -38,34 +38,32 @@ module.exports = {
           lat: 114.1694,
           lng: 22.3193,
           name: 'Internment zone',
-          description: '',
+          description: 'A newly renovated house located in a designated area of land for descendants of Ymir Fritz in a segregated part of Marley to live.',
           price: 5.99
         },
         {
           ownerId: 3,
-          address: '',
+          address: '8888 Rocks Comingyour Way',
           city: 'Outer Wall Rose',
           state: 'Wall Rose',
           country: 'Paradis Island',
-          lat: ,
-          lng: ,
+          lat: 117.2340,
+          lng: 32.8801,
           name: 'Utgard Castle',
-          description: '',
+          description: 'Abandoned castle used temporarily by members of the Survey Corps. Beware of Beast Titan.',
           price: 17
         },
       ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
-      options,
-      {
-        country: {
-          [Op.in]: ['']
-        },
-      }
-    )
+      options, {
+      country: {
+        [Op.in]: [1, 2, 3]
+      },
+    });
   }
 };
 
