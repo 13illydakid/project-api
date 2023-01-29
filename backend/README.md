@@ -16,7 +16,11 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+<!-- `<insert database schema design here>` -->
+
+![airbnb-dbdiagram]
+[airbnb-dbdiagram]: ./airbnb_dbdiagram.png
+
 
 ## API Documentation
 
