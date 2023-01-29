@@ -1,8 +1,5 @@
 'use strict';
 
-// /** @type {import('sequelize-cli').Migration} */
-
-
 const bcrypt = require("bcryptjs");
 
 let options = {};
@@ -11,6 +8,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 options.tableName = 'ReviewImages';
+
+/** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
   async up(queryInterface, Sequelize) {
