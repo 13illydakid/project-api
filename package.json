@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
@@ -21,9 +22,5 @@
   "bugs": {
     "url": "https://github.com/13illydakid/project-api/issues"
   },
-  "homepage": "https://github.com/13illydakid/project-api#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "express-validator": "^6.14.3"
-  }
+  "homepage": "https://github.com/13illydakid/project-api#readme"
 }
