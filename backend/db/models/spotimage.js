@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ImageSpot.belongsTo(
+      SpotImage.belongsTo(
         models.Spot,
         {
           foreignKey: 'spotId'
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       );
     }
   }
-  ImageSpot.init({
+  SpotImage.init({
     // id: DataTypes.INTEGER,
     spotId: {
       type: DataTypes.INTEGER,
@@ -37,5 +37,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'SpotImage',
   });
-  return ImageSpot;
+  return SpotImage;
 };
