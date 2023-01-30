@@ -98,7 +98,17 @@ router.post(
         errors: errorArray
       });
     }
-
+    // const { setTokenCookie } = require('../../utils/auth.js');
+    // const { User } = require('../../db/models');
+    // router.get('/set-token-cookie', async (_req, res) => {
+    //   const user = await User.findOne({
+    //       where: {
+    //         username: 'Demo-lition'
+    //       }
+    //     });
+    //   setTokenCookie(res, user);
+    //   return res.json({ user: user });
+    // });
     const user = await User.signup(
       {
         firstName,
@@ -109,11 +119,13 @@ router.post(
       }
     );
 
-    let token = await setTokenCookie(res, user);
-
+    const token = setTokenCookie(res, user);
+      res.status(200);
     return res.json({
       // user: user
-      user: user
+      statusCode: 200,
+      user: user,
+      token: token
       // {
       //   id: user.id,
       //   firstName: user.firstName,
