@@ -1,6 +1,6 @@
 'use strict';
-const bcrypt = require('bcryptjs');
-const { Model, Validator } = require('sequelize');
+
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ReviewImage extends Model {
     /**
@@ -20,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ReviewImage.init({
     // id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
