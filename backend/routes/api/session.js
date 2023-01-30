@@ -67,12 +67,14 @@ router.get(
     if (user) {
       return res.json({
         //   user: user.toSafeObject()
-        user: user
+        user: user.toSafeObject()
       });
-    } else return res.json(
-      {
-        user: null
-      });
+    } else {
+      return res.json(
+        {
+          user: null
+        });
+    }
   }
 );
 
