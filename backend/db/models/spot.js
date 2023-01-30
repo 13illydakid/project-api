@@ -1,13 +1,7 @@
 'use strict';
-// const bcrypt = require('bcryptjs');
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     async avgRating() {
       const reviews = await this.getReviews()
       let starsArr = []
@@ -30,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         models.User,
         {
           foreignKey: 'ownerId',
-          as: 'Owner',
+          // as: 'Owner',
         }
       );
       Spot.hasMany(
@@ -38,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           foreignKey: 'spotId',
           onDelete: 'CASCADE',
-          // hooks: true
+          hooks: true
         }
       );
       Spot.hasMany(
@@ -46,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           foreignKey: 'spotId',
           onDelete: 'CASCADE',
-          // hooks: true
+          hooks: true
         }
       );
       Spot.hasMany(
@@ -54,27 +48,16 @@ module.exports = (sequelize, DataTypes) => {
         {
           foreignKey: 'spotId',
           onDelete: 'CASCADE',
-          // hooks: true
+          hooks: true
         }
       );
     }
   }
   Spot.init({
-    // id: DataTypes.INTEGER,
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE',
-      references: {
-        model: 'Users',
-        key: 'id'
-      }
+      // onDelete: 'CASCADE'
     },
     address: {
       type: DataTypes.STRING,
@@ -109,13 +92,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        max: 50
+        min: 0
       }
     },
   }, {
