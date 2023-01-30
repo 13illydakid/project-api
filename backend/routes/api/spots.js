@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router();
 const Sequelize = require("sequelize")
 const { requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
-
-
+const { User, Spot, SpotImage, Review, ReviewImage, Booking, sequelize } = require('../../db/models');
+const { check } = require('express-validator');
+const { Op } = require('sequelize');
+const { handleValidationErrors } = require('../../utils/validation');
 const validateSpot = async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId)
@@ -15,8 +16,18 @@ const validateSpot = async (req, res, next) => {
             statusCode: 403,
         });
     }
-    // next()
 }
+
+const validateReviews = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage('Review text is required'),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1, max: 5 })
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+];
 
 // is there a Spot or no Spot
 const confirmSpot = async (req, res, next) => {

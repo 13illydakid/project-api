@@ -53,6 +53,15 @@ router.post(
           'User with that username already exists'
         ]
       });
+    } else{
+      res.status(401);
+      return res.json({
+        message: 'Login failed',
+        statusCode: 401,
+        errors: [
+          'Invalid credentials'
+        ]
+      });
     }
     let emailChecker = await User.findOne({
       where: { email: email }

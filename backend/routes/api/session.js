@@ -38,7 +38,7 @@ router.post(
 
     return res.json({
       // user: user
-      user: {
+      'user': {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
