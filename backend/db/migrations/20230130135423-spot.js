@@ -1,17 +1,14 @@
 'use strict';
+/** @type {import('sequelize-cli').Migration} */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-options.tableName = 'Reviews';
-
-/** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Reviews', {
+    return queryInterface.createTable('Spots', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,26 +18,48 @@ module.exports = {
       // id: {
       //   type: Sequelize.INTEGER
       // },
-      userId: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: 'Users'
         },
       },
-      spotId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Spots'
-        },
-      },
-      review: {
+      address: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      stars: {
-        type: Sequelize.INTEGER,
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      country: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lat: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      lng: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      price: {
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       createdAt: {
@@ -56,7 +75,7 @@ module.exports = {
     }, options);
   },
   down: async (queryInterface, Sequelize) => {
-    options.tableName = 'Reviews';
+    options.tableName = 'Spots';
     return queryInterface.dropTable(options);
   }
 };

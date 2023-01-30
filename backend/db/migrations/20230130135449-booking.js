@@ -1,14 +1,15 @@
 'use strict';
-// /** @type {import('sequelize-cli').Migration} */
+/** @type {import('sequelize-cli').Migration} */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-options.tableName = 'SpotImages';
+// options.tableName = 'Bookings';
+
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('SpotImages', {
+  up: async (queryInterface, Sequelize)=> {
+    return queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -18,6 +19,14 @@ module.exports = {
       // id: {
       //   type: Sequelize.INTEGER
       // },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users'
+        },
+      },
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -26,12 +35,12 @@ module.exports = {
           model: 'Spots'
         },
       },
-      url: {
-        type: Sequelize.STRING,
+      startDate: {
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      preview: {
-        type: Sequelize.BOOLEAN,
+      endDate: {
+        type: Sequelize.DATEONLY,
         allowNull: false,
       },
       createdAt: {
@@ -46,8 +55,8 @@ module.exports = {
       },
     }, options);
   },
-  down: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+  down: async (queryInterface, Sequelize)=> {
+    options.tableName = 'Bookings';
     return queryInterface.dropTable(options);
   }
 };
