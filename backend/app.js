@@ -11,6 +11,9 @@ const isProduction = environment === 'production';
 
 const routes = require('./routes');
 
+const { ValidationError } = require('sequelize');
+require('dotenv').config();
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -19,7 +22,7 @@ app.use(express.json());
 
 
 
-const { ValidationError } = require('sequelize');
+// const { ValidationError } = require('sequelize');
 // app.use(routes);
 
 // const app = express();
@@ -57,7 +60,7 @@ if (!isProduction) {
 
   // const routes = require('./routes');
 
-  // app.use(routes);
+  app.use(routes);
 
   app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
@@ -89,6 +92,6 @@ if (!isProduction) {
     });
   });
 
-  app.use(routes);
+  // app.use(routes);
 
   module.exports = app;
