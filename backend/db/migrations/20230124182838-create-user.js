@@ -1,17 +1,12 @@
 'use strict';
-
-// const { sequelize } = require("../models");
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-// options.tableName = 'Users';
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Users", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,11 +14,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       firstName: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING,
         allowNull: false
       },
       lastName: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING,
         allowNull: false
       },
       username: {
@@ -32,7 +27,7 @@ module.exports = {
         unique: true
       },
       email: {
-        type: Sequelize.STRING(256),
+        type: Sequelize.STRING(30),
         allowNull: false,
         unique: true
       },
@@ -52,8 +47,8 @@ module.exports = {
       }
     }, options);
   },
-  down: async (queryInterface, Sequelize) => {
-    options.tableName = 'Users';
-    return queryInterface.dropTable(options);
+  async down(queryInterface, Sequelize) {
+    options.tableName = "Users";
+    await queryInterface.dropTable(options);
   }
 };

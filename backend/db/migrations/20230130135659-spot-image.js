@@ -1,53 +1,46 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 // options.tableName = 'SpotImages';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('SpotImages', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('SpotImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id: {
-      //   type: Sequelize.INTEGER
-      // },
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Spots'
-        },
+        references: { model: 'Spots' },
+        onDelete: "CASCADE"
       },
       url: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       preview: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        defaultValue: Sequelize.literal('Current_TimeStamp')
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-      },
+        defaultValue: Sequelize.literal('Current_TimeStamp')
+      }
     }, options);
   },
-  down: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
-    return queryInterface.dropTable(options);
+  async down(queryInterface, Sequelize) {
+    options.tableName = "SpotImages";
+    await queryInterface.dropTable(options);
   }
 };
