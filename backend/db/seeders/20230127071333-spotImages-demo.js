@@ -13,17 +13,17 @@ module.exports = {
       options,
       [
         {
-          spotId: 1,
+          // spotId: 1,
           url: 'https://static01.nyt.com/images/2019/06/25/realestate/25domestic-zeff/a1c1a1a36c9e4ff8adcb958c4276f28d-jumbo.jpg',
           preview: true
         },
         {
-          spotId: 2,
+          // spotId: 2,
           url: 'https://cdn11.bigcommerce.com/s-g95xg0y1db/images/stencil/1280w/carousel/28/pool_house_plan_riverview_exterior__63449.jpg?c=1',
           preview: true
         },
         {
-          spotId: 3,
+          // spotId: 3,
           url: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_33/1599433/pie-house-mc-main1-2008118.jpg',
           preview: true
         },
