@@ -7,8 +7,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spots', {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.createTable('Spots', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -74,8 +74,8 @@ module.exports = {
       },
     }, options);
   },
-  async down(queryInterface, Sequelize) {
+  down: async (queryInterface, Sequelize) => {
     options.tableName = 'Spots';
-    await queryInterface.dropTable(options);
+    return queryInterface.dropTable(options);
   }
 };

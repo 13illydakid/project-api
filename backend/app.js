@@ -9,15 +9,29 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
+const routes = require('./routes');
 
+const { ValidationError } = require('sequelize');
+require('dotenv').config();
 
 const app = express();
 
-
 app.use(morgan('dev'));
-
 app.use(cookieParser());
 app.use(express.json());
+
+
+
+// const { ValidationError } = require('sequelize');
+// app.use(routes);
+
+// const app = express();
+
+
+// app.use(morgan('dev'));
+
+// app.use(cookieParser());
+// app.use(express.json());
 
 // Security Middleware
 if (!isProduction) {
@@ -44,7 +58,7 @@ if (!isProduction) {
   );
 
 
-  const routes = require('./routes');
+  // const routes = require('./routes');
 
   app.use(routes);
 
@@ -56,7 +70,7 @@ if (!isProduction) {
     next(err);
   });
 
-  const { ValidationError } = require('sequelize');
+  // const { ValidationError } = require('sequelize');
 
   app.use((err, _req, _res, next) => {
     // check if error is a Sequelize error:
@@ -77,5 +91,7 @@ if (!isProduction) {
       stack: isProduction ? null : err.stack
     });
   });
+
+  // app.use(routes);
 
   module.exports = app;

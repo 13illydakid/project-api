@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "sequelize": "sequelize",
     "sequelize-cli": "sequelize-cli",
     "start": "per-env",
@@ -28,9 +27,9 @@
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "per-env": "^1.0.2",
-    "pg": "^8.8.0",
+    "pg": "^8.9.0",
     "sequelize": "^6.28.0",
-    "sequelize-cli": "^6.5.2"
+    "sequelize-cli": "^6.6.0"
   },
   "devDependencies": {
     "dotenv-cli": "^7.0.0",

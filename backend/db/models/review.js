@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     /**
@@ -28,21 +27,25 @@ module.exports = (sequelize, DataTypes) => {
         {
           foreignKey: 'reviewId',
           onDelete: 'CASCADE',
-          hooks: true
+          // hooks: true
         }
       );
     }
   }
   Review.init({
     // id: DataTypes.INTEGER,
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    // spotId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
     review: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class SpotImage extends Model {
     /**
@@ -24,14 +23,19 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'Spots',
+        key: 'id'
+      }
     },
     url: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false,
     },
     preview: {
       type: DataTypes.BOOLEAN,
-      // allowNull: false,
+      allowNull: false,
     }
   }, {
     sequelize,

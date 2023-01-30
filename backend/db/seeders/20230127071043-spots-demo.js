@@ -60,7 +60,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
       options, {
-      country: {
+      ownerId: {
         [Op.in]: [1, 2, 3]
       },
     });
