@@ -2,22 +2,22 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
-    async avgRating() {
-      const reviews = await this.getReviews()
-      let starsArr = []
+    // async avgRating() {
+    //   const reviews = await this.getReviews()
+    //   let starsArr = []
 
-      for (let i = 0; i < reviews.length; i++) {
-        starsArr.push(reviews[i].stars)
-      }
+    //   for (let i = 0; i < reviews.length; i++) {
+    //     starsArr.push(reviews[i].stars)
+    //   }
 
-      let sum = 0
-      for (let i = 0; i < starsArr.length; i++) {
-        sum += starsArr[i]
-      }
+    //   let sum = 0
+    //   for (let i = 0; i < starsArr.length; i++) {
+    //     sum += starsArr[i]
+    //   }
 
-      return sum / starsArr.length
+    //   return sum / starsArr.length
 
-    }
+    // }
     static associate(models) {
       // define association here
       Spot.belongsTo(
@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false,
     },
     price: {
       type: DataTypes.FLOAT,
