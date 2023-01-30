@@ -1,15 +1,10 @@
 'use strict';
 
-const bcrypt = require("bcryptjs");
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
-options.tableName = 'Spots';
-
-/** @type {import('sequelize-cli').Migration} */
+options.tableName = 'Spots'
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -54,18 +49,17 @@ module.exports = {
           description: 'Abandoned castle used temporarily by members of the Survey Corps. Beware of Beast Titan.',
           price: 17
         },
-      ], {});
+      ], options);
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
       options, {
-      ownerId: {
+      id: {
         [Op.in]: [1, 2, 3]
       },
-    });
+    }, {});
   }
 };
 
