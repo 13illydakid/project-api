@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -27,14 +26,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init({
     // id: DataTypes.INTEGER,
-    userId: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    // spotId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
     startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
