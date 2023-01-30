@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, Booking, sequelize } = require('../../db/models');
-
-const Sequelize = require('sequelize')
-const Op = Sequelize.Op;
-
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
+const sequelize = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 
@@ -15,37 +11,32 @@ router.delete('/:imageId', requireAuth, async(req, res, next)=>{
     const imageId = req.params.imageId;
     const selectImage = await SpotImage.findByPk(imageId);
 
-    const currUserId = req.user.id;
-    const selectSpot = await Spot.findOne({
-        where: {
-            id: selectSpot.spotId
-        }
-    });
+    const user = req.user;
 
-    if(!selectImage){
-        res.status(404);
-        return res.json({
-            message: "Spot Image couldn't be found",
-            statusCode: 404,
-        });
-    }
-    if(currUserId !== selectSpot.Review.userId){
-        res.status(403);
-        return res.json({
-            message: "Forbidden",
-            statusCode: 403,
-            errors: [
-                "You are not authorized for this task"
-            ]
-        });
-    } else{
-        await selectImage.destroy();
-        res.status(200);
-        return res.json({
-            message: 'Successfully deleted',
-            statusCode: 200
-        });
-    }
-});
+    const err = {};
+    if (!selectImage) {
+        err.title = "Couldn't find a Spot Image with the specified id";
+        err.status = 404;
+        err.message = "Spot Image couldn't be found"
+        return next(err)
+    };
+
+    const spot = await selectImage.getSpot();
+
+    /// spot belongs to user
+    if (selectImage.id !== spot.ownerId) {
+        err.title = "Authorization error";
+        err.status = 403;
+        err.message = "Cannot delete image from spot not owned by user"
+        return next(err)
+    };
+
+    selectImage.destroy();
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+})
+
 
 module.exports = router;
