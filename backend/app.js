@@ -6,13 +6,13 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
-const { environment } = require('./config');
-const isProduction = environment === 'production';
 
-const routes = require('./routes');
+// const routes = require('./routes');
 
 const { ValidationError } = require('sequelize');
-require('dotenv').config();
+const { environment } = require('./config');
+const isProduction = environment === 'production';
+// require('dotenv').config();
 
 const app = express();
 
@@ -59,7 +59,7 @@ if (!isProduction) {
 
 
   // const routes = require('./routes');
-
+  const routes = require('./routes');
   app.use(routes);
 
   app.use((_req, _res, next) => {
