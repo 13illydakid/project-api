@@ -8,17 +8,19 @@ const cookieParser = require('cookie-parser');
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
-
-
-
 const app = express();
+const routes = require('./routes');
+const { ValidationError } = require('sequelize');
+// app.use(routes);
+
+// const app = express();
 
 
 app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json());
-
+app.use(routes);
 // Security Middleware
 if (!isProduction) {
     // enable cors only in development
@@ -44,9 +46,9 @@ if (!isProduction) {
   );
 
 
-  const routes = require('./routes');
+  // const routes = require('./routes');
 
-  app.use(routes);
+  // app.use(routes);
 
   app.use((_req, _res, next) => {
     const err = new Error("The requested resource couldn't be found.");
@@ -56,7 +58,7 @@ if (!isProduction) {
     next(err);
   });
 
-  const { ValidationError } = require('sequelize');
+  // const { ValidationError } = require('sequelize');
 
   app.use((err, _req, _res, next) => {
     // check if error is a Sequelize error:

@@ -22,9 +22,9 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/bookings', bookingsRouter);
 router.use('/reviews', reviewsRouter);
-router.use('/review-Images', reviewImagesRouter);
+router.use('/review-images', reviewImagesRouter);
 router.use('/spots', spotsRouter);
-router.use('/spot-Images', spotImagesRouter);
+router.use('/spot-images', spotImagesRouter);
 
 
 router.post('/test', (req, res) => {
