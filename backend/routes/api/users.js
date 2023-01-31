@@ -20,7 +20,7 @@ router.post(
     });
     const err = {};
 
-    if (checkEmail) {
+    if (emailChecker) {
       err.title = "Validation error"
       err.message = "User already exists";
       err.status = 403;
@@ -29,7 +29,7 @@ router.post(
       return next(err)
   }
 
-  if (checkUserName) {
+  if (isUserNameTaken) {
       err.title = "Validation error"
       err.message = "User already exists";
       err.status = 403;
