@@ -1,41 +1,6 @@
 // frontend/src/store/index.js
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import React from 'react';
-
-import './index.css';
-
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-
-import configureStore from './store';
-const store = configureStore();
-
-if (process.env.NODE_ENV !== 'production') {
-  window.store = store;
-}
-
-function Root() {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    );
-  }
-
-  function Root() {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    );
-  }
 
 const rootReducer = combineReducers({
 });
@@ -52,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const configureStore = (preloadedState) => {
-    return createStore(rootReducer, preloadedState, enhancer);
-  };
+  return createStore(rootReducer, preloadedState, enhancer);
+};
 
-  export default configureStore;
+export default configureStore;
