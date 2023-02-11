@@ -502,7 +502,6 @@ router.get('/:spotId/bookings', requireAuth, ifSpotExists, async (req, res, next
     })
 })
 
-
 /// Create a Booking
 router.post('/:spotId/bookings', requireAuth, ifSpotExists, validateBooking, async (req, res, next) => {
     const { spotId } = req.params;
@@ -529,7 +528,6 @@ router.post('/:spotId/bookings', requireAuth, ifSpotExists, validateBooking, asy
         err.message = "End date cannot be on or before start Date";
         return next(err);
     };
-
 
     /// Owner can't make booking on own spot
     if (user.id === spot.ownerId) {
@@ -577,13 +575,7 @@ router.post('/:spotId/bookings', requireAuth, ifSpotExists, validateBooking, asy
         })
         return res.json(newBooking)
     };
-})
-
-
-
-
-
-
+});
 
 
 module.exports = router;
