@@ -130,9 +130,9 @@
 // };
 
 'use strict';
-const { Model } = require('sequelize');
+const { Validator, Model } = require('sequelize');
 //const { Validator } = require('sequelize');
-const { validateEmail } = require('../../utils/validation');
+// const { validateEmail } = require('../../utils/validation');
 const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
@@ -207,12 +207,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [4, 30],
-          validateEmail
-          // isNotEmail(value) {
-          //   if (Validator.isEmail(value)) {
-          //     throw new Error("Cannot be an email.");
-          //   }
-          // }
+          // validateEmail
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error("Cannot be an email.");
+            }
+          }
         }
       },
       hashedPassword: {
