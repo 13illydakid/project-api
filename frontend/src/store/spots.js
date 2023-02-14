@@ -10,38 +10,38 @@ const ADD_IMAGE = 'spots/ADD_IMAGE';
 
 // action creators
 
-export const GetSingleSpot = (spot) => {
+export const getSingleSpot = (spot) => {
     return {
         type: GET_SINGLE_SPOT,
         spot
     }
 }
-export const GetAllSpots = (spots) => {
+export const getAllSpots = (spots) => {
     return {
         type: GET_ALL_SPOTS,
         spots
     }
 }
-export const CreateSpot = (spot) => {
+export const createSpot = (spot) => {
     return {
         type: CREATE_SPOT,
         spot
     }
 }
-export const EditSpot = (spotId, spot) => {
+export const editSpot = (spotId, spot) => {
     return {
         type: EDIT_SPOT,
         spotId,
         spot
     }
 }
-export const RemoveSpot = (spotId) => {
+export const removeSpot = (spotId) => {
     return {
         type: REMOVE_SPOT,
         spotId
     }
 }
-export const AddImage = (spotId, url, preview) => {
+export const addImage = (spotId, url, preview) => {
     return {
         type: ADD_IMAGE,
         spotId,
@@ -61,7 +61,7 @@ export const getSingleSpotThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`);
     if(res.ok){
         const spot = await res.json();
-        dispatch(GetSingleSpot(spot));
+        dispatch(getSingleSpot(spot));
         return spot;
     }
 }
@@ -69,7 +69,7 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     const res = await csrfFetch('/api/spots');
     if(res.ok){
         const spots = await res.json();
-        dispatch(GetAllSpots(spots));
+        dispatch(getAllSpots(spots));
         return spots;
     }
 }
@@ -82,7 +82,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
     });
     if(res.ok){
         const spot = await res.json();
-        dispatch(CreateSpot(spot));
+        dispatch(createSpot(spot));
         return spot;
     }
 }
@@ -95,7 +95,7 @@ export const editSpotThunk = (spotId, spot) => async (dispatch) => {
     });
     if(res.ok){
         const spot = await res.json();
-        dispatch(EditSpot(spotId, spot));
+        dispatch(editSpot(spotId, spot));
         return spot;
     }
 }
@@ -104,7 +104,7 @@ export const removeSpotThunk = (spotId) => async (dispatch) => {
         method: 'DELETE'
     });
     if(res.ok){
-        dispatch(RemoveSpot(spotId));
+        dispatch(removeSpot(spotId));
     }
 }
 export const addImageThunk = (spotId, url, preview) => async (dispatch) => {
@@ -116,7 +116,7 @@ export const addImageThunk = (spotId, url, preview) => async (dispatch) => {
     });
     if(res.ok){
         const { spotId, url, preview } = await res.json();
-        dispatch(AddImage(spotId, url, preview));
+        dispatch(addImage(spotId, url, preview));
         return spotId;
     }
 }
