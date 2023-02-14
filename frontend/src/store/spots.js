@@ -128,12 +128,12 @@ const initialState = {
 }
 
 // reducer
-function spotsReducer ( state = initialState, action ) {
-    const newState;
-    switch(action.type){
-        case GET_SINGLE_SPOT: {
-            newState = { ...state }
-            newState.spots = 
-        }
-    }
-}
+// function spotsReducer ( state = initialState, action ) {
+//     const newState;
+//     switch(action.type){
+//         case GET_SINGLE_SPOT: {
+//             newState = { ...state }
+//             newState.spots =
+//         }
+//     }
+// }
