@@ -162,13 +162,13 @@ const validateQuery = [
 //     }
 //   }
 
-const validateEmail = [
-  check('value')
-    .exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage('Cannot be an email.'),
-    handleValidationErrors
-]
+// const validateEmail = [
+//   check('value')
+//     .exists({ checkFalsy: true })
+//     .isEmail()
+//     .withMessage('Cannot be an email.'),
+//     handleValidationErrors
+// ]
 
 module.exports = {
   handleValidationErrors,
@@ -178,6 +178,5 @@ module.exports = {
   validateBooking,
   validateReview,
   validateReviewImage,
-  validateQuery,
-  validateEmail
+  validateQuery
 };
