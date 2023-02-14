@@ -122,18 +122,25 @@ export const addImageThunk = (spotId, url, preview) => async (dispatch) => {
 }
 // end
 
+// reducer
 const initialState = {
     singleSpot: {},
     allSpots: {}
 }
 
-// reducer
-// function spotsReducer ( state = initialState, action ) {
-//     const newState;
-//     switch(action.type){
-//         case GET_SINGLE_SPOT: {
-//             newState = { ...state }
-//             newState.spots =
-//         }
-//     }
-// }
+function spotsReducer ( state = initialState, action ) {
+    //const newState;
+    let newState;
+    switch(action.type){
+        case GET_SINGLE_SPOT: {
+            newState = { ...state }
+            newState.singleSpot = action.spot
+            return newState
+        }
+        case GET_ALL_SPOTS: {
+            newState = { ...state }
+            const normalizedSpots = {};
+            
+        }
+    }
+}

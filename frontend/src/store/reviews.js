@@ -44,3 +44,61 @@ export const removeReview = (reviewId) => {
 }
 
 // thunks
+export const getUserReviewsThunk = (userId) => async (dispatch) => {
+    const res = await csrfFetch('/api/reviews/current');
+    if(res.ok){
+        const reviews = await res.json();
+        dispatch(getUserReviews(userId, reviews));
+        return reviews;
+    }
+}
+export const getSpotReviewsThunk = (spotId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+    if(res.ok){
+        const reviews = await res.json();
+        dispatch(getSpotReviews(spotId, reviews));
+        return reviews;
+    }
+}
+export const addReviewThunk = (spotId, review) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, body: JSON.stringify(review)
+    });
+    if(res.ok){
+        const review = await res.json();
+        dispatch(addReview(spotId, review));
+        return review;
+    }
+}
+export const editReviewThunk = (reviewId, review) => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'applicaiton/json'
+        }, body: JSON.stringify(review)
+    });
+    if(res.ok){
+        const newReview = await res.json();
+        dispatch(editReview(reviewId, review));
+        return newReview;
+    }
+}
+export const removeReviewThunk = (reviewId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+    });
+    if(res.ok){
+        const formerReview = await res.json();
+        dispatch(removeReview(reviewId));
+        return formerReview;
+    }
+}
+
+// reducer
+const initialState = {
+    userReviews: {},
+    spotReviews: {}
+}
