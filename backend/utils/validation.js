@@ -1,5 +1,4 @@
 const { validationResult, check } = require('express-validator');
-
 const handleValidationErrors = (req, _res, next) => {
   const validationErrors = validationResult(req);
 
@@ -157,6 +156,20 @@ const validateQuery = [
   handleValidationErrors
 ];
 
+// export const validateEmail = (value) => {
+//     if (Validator.isEmail(value)) {
+//       throw new Error("Cannot be an email.");
+//     }
+//   }
+
+const validateEmail = [
+  check('value')
+    .exists({ checkFalsy: true })
+    .isEmail()
+    .withMessage('Cannot be an email.'),
+    handleValidationErrors
+]
+
 module.exports = {
   handleValidationErrors,
   validateSignup,
@@ -165,5 +178,6 @@ module.exports = {
   validateBooking,
   validateReview,
   validateReviewImage,
-  validateQuery
+  validateQuery,
+  validateEmail
 };
