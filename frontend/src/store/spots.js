@@ -128,7 +128,7 @@ const initialState = {
     allSpots: {}
 }
 
-function spotsReducer ( state = initialState, action ) {
+export const spotsReducer = ( state = initialState, action ) => {
     //const newState;
     let newState;
     switch(action.type){
@@ -140,7 +140,7 @@ function spotsReducer ( state = initialState, action ) {
         case GET_ALL_SPOTS: {
             newState = { ...state }
             const normalizedSpots = {};
-            
+
         }
     }
 }
