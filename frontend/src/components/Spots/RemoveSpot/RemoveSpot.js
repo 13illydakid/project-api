@@ -9,7 +9,7 @@ export default function RemoveSpot(spot) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { noModal } = useModal();
-    thisSpot = spot.spot;
+    const thisSpot = spot.spot;
 
     const [error, setError] = useState([]);
     const revert = (i) => {
