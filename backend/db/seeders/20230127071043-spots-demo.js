@@ -57,7 +57,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options, {
       country: {
-        [Op.in]: ['Marley']
+        [Op.in]: ['Wall Maria', 'Marley', 'Paradis Island']
       },
     }, {});
   }
