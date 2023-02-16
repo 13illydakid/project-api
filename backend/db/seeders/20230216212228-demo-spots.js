@@ -62,28 +62,3 @@ module.exports = {
     }, {});
   }
 };
-
-// {
-//   ownerId: 1,
-//   address: '0001 Tata',
-//   city: 'San Diego',
-//   state: 'California',
-//   country: 'United States',
-//   lat: ,
-//   lng: ,
-//   name: '',
-//   description: '',
-//   price:
-// },
-// {
-//   ownerId: 2,
-//   address: '',
-//   city: 'Irvine',
-//   state: 'California',
-//   country: 'United States',
-//   lat: ,
-//   lng: ,
-//   name: '',
-//   description: '',
-//   price:
-// },
