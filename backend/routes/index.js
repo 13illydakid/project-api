@@ -46,8 +46,8 @@ if (process.env.NODE_ENV !== 'production') {
     return res.json({});
   });
 }
-// router.post('/api/test', (req,res)=>{
-//   return res.json({requestBody: req.body})
-// });
+router.post('/api/test', (req,res)=>{
+  return res.json({requestBody: req.body})
+});
 
 module.exports = router;
