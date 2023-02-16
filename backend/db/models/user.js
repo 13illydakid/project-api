@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         models.Spot,
         {
           foreignKey: 'ownerId',
+          as: 'Owner',
           onDelete: 'CASCADE',
           hooks: true,
         }
@@ -74,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
         validate: {
           len: [4, 30],
           isNotEmail(value) {
@@ -118,7 +119,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ['hashedPassword'/*, 'createdAt', 'updatedAt'*/] }
+          attributes: { exclude: ['hashedPassword', 'createdAt', 'updatedAt'] }
         },
         loginUser: {
           attributes: {}
