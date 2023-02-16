@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const apiRouter = require('./api');
-// router.use('/api', apiRouter);
+const apiRouter = require('./api');
+router.use('/api', apiRouter);
 
 
 router.get("/api/csrf/restore", (req, res) => {
@@ -12,8 +12,8 @@ router.get("/api/csrf/restore", (req, res) => {
     });
   });
 
-  const apiRouter = require('./api');
-  router.use('/api', apiRouter);
+  // const apiRouter = require('./api');
+  // router.use('/api', apiRouter);
 
   // Static routes
 // Serve React build files in production
