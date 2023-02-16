@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // onDelete: 'CASCADE'
+      onDelete: 'CASCADE'
     },
     address: {
       type: DataTypes.STRING,
