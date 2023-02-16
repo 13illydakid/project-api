@@ -1,18 +1,6 @@
 # project-api
-<!-- # Enter avg.BnB -->
-<!-- # Introducing avg.BnB -->
-<!-- # Welcome to avg.BnB -->
-# Welcome to urAvg.BnB
-<!-- # Welcome to uravg.BnB -->
-<!-- # Welcome to wd40.BnB -->
-
-<!-- # Featuring avg.BnB
-# Presenting avg.BnB
-# remote.BnB
-# 323.BnB -->
-<!-- # About avg.BnB -->
-<!-- # AVG.BnB Clone
-# Avg.BnB Clone -->
+<!-- # Welcome to urAvg.BnB -->
+# Welcome to elle.BnB, L is for elegance.
 
 ## Database Schema Design
 
