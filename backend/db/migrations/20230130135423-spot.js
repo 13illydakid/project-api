@@ -15,8 +15,8 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' },
-        // onDelete: "CASCADE"
+        references: { model: 'Users', key: 'id' },
+        onDelete: "CASCADE"
       },
       address: {
         type: Sequelize.STRING,
@@ -66,7 +66,8 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Spots'
-    await queryInterface.dropTable(options);
+    // options.tableName = 'Spots'
+    // await queryInterface.dropTable(options);
+    await queryInterface.dropTable('Spots');
   }
 };
