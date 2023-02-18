@@ -17,5 +17,5 @@ const array = Object.values(obj);
 if(array.length === 0){
     return null;
 } else{
-    
+
 }

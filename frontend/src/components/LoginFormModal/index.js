@@ -1,4 +1,4 @@
-// frontend/src/components/LoginFormModal/index.js
+// frontend/src/components/LoginFormPage/index.js
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
