@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE',
+      // onDelete: 'CASCADE',
     },
     url: {
       type: DataTypes.STRING,
