@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { editSpotThunk, getSingleSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
 
-export default function EditSpot() {
+export default function EditSpot(spotId) {
   // const user = useSelector(state => state.session.user)
   const spot = useSelector((state) => state.spots.singleSpot)
   const dispatch = useDispatch();
@@ -14,21 +14,21 @@ export default function EditSpot() {
   const history = useHistory();
   const { noModal } = useModal();
   // spot = spot.spot;
-  const { spotId } = useParams();
-  const [address, setAddress] = useState(spot.address);
-  const [city, setCity] = useState(spot.city);
-  const [state, setState] = useState(spot.state);
-  const [country, setCountry] = useState(spot.country);
-  const [lat, setLat] = useState(spot.lat);
-  const [lng, setLng] = useState(spot.lng);
-  const [name, setName] = useState(spot.name);
-  const [description, setDescription] = useState(spot.description);
-  const [price, setPrice] = useState(spot.price);
+  // const { spotId } = useParams();
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     dispatch(getSingleSpotThunk(spotId))
-  }, [dispatch])
+  }, [dispatch, spotId])
 
   useEffect(() => {
     if (Object.values(spot).length) {
@@ -47,7 +47,7 @@ export default function EditSpot() {
   const submitNow = (e) => {
     e.preventDefault();
 
-    const spotInfo = {
+    const data = {
       name,
       description,
       address,
@@ -59,7 +59,7 @@ export default function EditSpot() {
       price,
     };
     // const spotId = spot.id;
-    dispatch(editSpotThunk(spotInfo, +spotId))
+    dispatch(editSpotThunk(data, spotId))
       .then((res) => noModal())
       .then((res) => history.push(`/spots/${spotId}`))
       .catch(async (res) => {
@@ -67,18 +67,18 @@ export default function EditSpot() {
         const message = await res.json();
         if (message && message.errors) setErrors(message.errors)
         else {
-          noModal();
+          // noModal();
         }
       });
   }
 
 
 
-  //   const handleCancelClick = (e) => {
-  //     e.preventDefault();
-  //     closeModal()
-  //     history.push(`/my-spots`);
-  //   };
+    const handleCancelClick = (e) => {
+      e.preventDefault();
+      noModal()
+      history.push("/spots/current");
+    };
 
   return (
     <div>

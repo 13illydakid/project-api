@@ -34,7 +34,7 @@ function App() {
           <Route path="/spots/new">
             <CreateSpot />
           </Route>
-          <Route path="/spots/current">
+          <Route exact path="/spots/current">
             <GetUserSpots />
           </Route>
           <Route exact path="/myreviews">
@@ -43,7 +43,7 @@ function App() {
           <Route path="/spots/:spotId/edit">
             <EditSpot />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <RemoveSpot />
           </Route>
           <Route><PageNotFound /></Route>

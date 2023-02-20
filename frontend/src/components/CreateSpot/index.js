@@ -53,7 +53,8 @@ export default function CreateSpot() {
       <form className="create-spot-form" onSubmit={handleSubmit}>
         {/* <div>Please Fill Below!</div> */}
         <div>
-          <div>Create your spot</div>
+            <h4>Create your Spot</h4>
+          {/* <div>Create your spot</div> */}
           <ul>
             {errors &&
               errors.map((error, id) => (
@@ -199,7 +200,7 @@ export default function CreateSpot() {
           </div>
           <div>
             <button className="modal-submit-button" type="submit">
-              Create new Spot !
+              Create Spot
             </button>
           </div>
         </div>

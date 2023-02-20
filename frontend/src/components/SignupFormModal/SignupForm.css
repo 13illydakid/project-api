@@ -6,7 +6,9 @@
 } */
 
 .formBox label {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
     margin: 25px;
+    justify-content: center;
+    /* margin: 25px; */
+    display: flex;
 }

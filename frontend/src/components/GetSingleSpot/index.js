@@ -25,7 +25,7 @@ export default function GetSingleSpot() {
 
   if (!Object.values(spot).length) return null;
 
-  const spotImgArr = spot?.SpotImages;
+  const spotImgArr = spot.SpotImages;
 
   let previewImages;
   let displayImages = [];
