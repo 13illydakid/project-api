@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import './Pagenotfound.css';
+import './PageNotFound.css';
 
 export default function PageNotFound() {
   const history = useHistory();
