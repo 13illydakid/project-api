@@ -5,7 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GetAllSpots from "./components/GetAllSpots";
 import GetSingleSpot from "./components/GetSingleSpot";
-import GetUserSpot from "./components/GetUserSpot";
+import GetUserSpots from "./components/GetUserSpots";
 import CreateSpot from "./components/CreateSpot";
 import EditSpot from "./components/EditSpot";
 
@@ -28,7 +28,7 @@ function App() {
             <CreateSpot />
           </Route>
           <Route path="/spots/current">
-            <GetUserSpot />
+            <GetUserSpots />
           </Route>
           <Route path="/spots/:spotId/edit">
             <EditSpot />
