@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { removeSpotThunk } from '../../..store/spots';
+import { removeSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
 import './RemoveSpot.css';
 
-export default function RemoveSpot(spot) {
+export default function RemoveSpot({spotId}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { noModal } = useModal();
-    const thisSpot = spot.spot;
+    // const thisSpot = spot.spot;
 
     const [error, setError] = useState([]);
     const revert = (i) => {
@@ -19,7 +19,7 @@ export default function RemoveSpot(spot) {
     const deleteNow = async (i) => {
         i.preventDefault();
         const deletion = await dispatch(
-            removeSpotThunk(thisSpot.id)
+            removeSpotThunk(spotId)
         ).catch(async (res) => {
             const datas = await res.json();
             if (datas) {

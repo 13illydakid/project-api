@@ -1,20 +1,25 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { createSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
-import '.CreateSpot.css';
+import './CreateSpot.css';
 
 export default function CreateSpot() {
     const dispatch = useDispatch();
+    const user = useSelector((state)=> state.session.User);
+    if(!user){
+        history.push('/');
+    }
+    const {spotId} = useParams();
     const history = useHistory();
     const { noModal } = useModal();
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
-    // const [ lat, setLat ] = useState(thisSpot.lat);
-    // const [ lng, setLng ] = useState(thisSpot.lng);
+    const [ lat, setLat ] = useState("");
+    const [ lng, setLng ] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -22,8 +27,8 @@ export default function CreateSpot() {
     const [preview, setPreview] = useState(true);
     const [url, setUrl] = useState("");
 
-    const submitNow = (i) => {
-        i.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
         const data = {
             address,
             city,
@@ -45,6 +50,9 @@ export default function CreateSpot() {
             })
             .then(noModal)
             .catch(async (res) => {
+                if (res === undefined) {
+                    return null;
+                }
                 const elem = await res.json();
                 if (elem) {
                     if (elem.error) {
@@ -58,11 +66,11 @@ export default function CreateSpot() {
 
     return (
         <div className="form">
-            <form onSubmit={submitNow}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <div className="title">Add a Spot</div>
                     <div className="errors">
-                        {error.map((err, j) => <div key={j}>{err}</div>)}
+                        {error.map((err, id) => <div key={id}>{err}</div>)}
                     </div>
 
                     // inputs **("add placeholders??")
@@ -102,7 +110,7 @@ export default function CreateSpot() {
                             onChange={(e) => setCountry(e.target.value)}
                         />
                     </div>
-                    {/* <div className="inputs">
+                    <div className="inputs">
                         <label>Lat</label>
                         <input
                             type="text"
@@ -119,7 +127,7 @@ export default function CreateSpot() {
                             required
                             onChange={(e)=>setLng(e.target.value)}
                         />
-                    </div> */}
+                    </div>
                     <div className="inputs">
                         <label>Name</label>
                         <input
@@ -158,17 +166,20 @@ export default function CreateSpot() {
                     </div>
                     <div className="inputs">
                         <label>Preview</label>
-                        <input
-                            type="url"
+                        <select
+                            // type="url"
+                            // required
                             value={preview}
-                            required
                             onChange={(e) => setPreview(e.target.value)}
-                        />
+                        >
+                            <option key="false">false</option>
+                            <option key="true">true</option>
+                        </select>
                     </div>
 
                     // Submit Button
                     <div>
-                        <button className="submit-button" type="submit" /* disabled={user === null || !user} */>Create Spot</button>
+                        <button className="submit-button" type="submit">Create Spot</button>
                     </div>
                 </div>
 

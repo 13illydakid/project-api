@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import OpenModalButton from "../OpenModalButton";
 import { useHistory } from "react-router-dom";
 import RemoveSpot from "../RemoveSpot";
-import './SpotTile.css'
+import './Spot.css'
 import { useSelector } from 'react-redux'
 export default function Spot({spot}){
     const path = window.location.href.split('/').pop()
@@ -32,5 +32,3 @@ export default function Spot({spot}){
         </div>
     )
 }
-
-

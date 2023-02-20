@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAllSpotsThunk } from '../../store/spots';
-import Spot from './Spot';
+import Spot from '../Spot';
 import './GetAllSpots.css';
 
 export default function GetAllSpots() {

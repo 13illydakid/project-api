@@ -1,54 +1,77 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { editSpotThunk, getSingleSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
-import '.EditSpot.css';
+import './EditSpot.css';
 
-export default function EditSpot(spot) {
+export default function EditSpot() {
+  // const user = useSelector(state => state.session.user)
+  const spot = useSelector((state) => state.spots.singleSpot)
   const dispatch = useDispatch();
+  // if (!user) {
+  //   history.push('/');
+  // }
   const history = useHistory();
   const { noModal } = useModal();
-  const thisSpot = spot.spot;
-  const [address, setAddress] = useState(thisSpot.address);
-  const [city, setCity] = useState(thisSpot.city);
-  const [state, setState] = useState(thisSpot.state);
-  const [country, setCountry] = useState(thisSpot.country);
-  const [lat, setLat] = useState(thisSpot.lat);
-  const [lng, setLng] = useState(thisSpot.lng);
-  const [name, setName] = useState(thisSpot.name);
-  const [description, setDescription] = useState(thisSpot.description);
-  const [price, setPrice] = useState(thisSpot.price);
+  // spot = spot.spot;
+  const { spotId } = useParams();
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [lat, setLat] = useState(spot.lat);
+  const [lng, setLng] = useState(spot.lng);
+  const [name, setName] = useState(spot.name);
+  const [description, setDescription] = useState(spot.description);
+  const [price, setPrice] = useState(spot.price);
   const [errors, setErrors] = useState([]);
-}
 
-const submitNow = (e) => {
-  e.preventDefault();
+  useEffect(() => {
+    dispatch(getSingleSpotThunk(spotId))
+  }, [dispatch])
 
-  const spotInfo = {
-    name,
-    description,
-    address,
-    city,
-    state,
-    country,
-    lat,
-    lng,
-    price,
-  };
+  useEffect(() => {
+    if (Object.values(spot).length) {
+      setAddress(spot.address)
+      setCity(spot.city)
+      setState(spot.state)
+      setCountry(spot.country)
+      setLat(spot.lat);
+      setLng(spot.lng);
+      setName(spot.name)
+      setDescription(spot.description)
+      setPrice(spot.price)
+    }
+  }, [spot])
 
-  dispatch(updateSingleSpot(spotInfo, +spotId))
-    .then((res) => noModal())
-    .then((res) => history.push(`/spots/${spotId}`))
-    .catch(async (res) => {
-      if (res === undefined) return null;
-      const message = await res.json();
-      if (message && message.errors) setErrors(message.errors)
-      else {
-        noModal();
-      }
-    });
+  const submitNow = (e) => {
+    e.preventDefault();
 
+    const spotInfo = {
+      name,
+      description,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      price,
+    };
+    // const spotId = spot.id;
+    dispatch(editSpotThunk(spotInfo, +spotId))
+      .then((res) => noModal())
+      .then((res) => history.push(`/spots/${spotId}`))
+      .catch(async (res) => {
+        if (res === undefined) return null;
+        const message = await res.json();
+        if (message && message.errors) setErrors(message.errors)
+        else {
+          noModal();
+        }
+      });
+  }
 
 
 
@@ -60,7 +83,7 @@ const submitNow = (e) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitNow}>
         <div className="modalHead">Edit your spot</div>
         <div>
           <ul>

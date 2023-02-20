@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // import thunks once you make them
-import { useModal } from '../../context/Modal'
+import { addReviewThunk } from '../../store/reviews';
 import { getSingleSpotThunk } from '../../store/spots';
+import { useModal } from '../../context/Modal'
 export default function CreateReview({ spotId }){
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,7 +36,7 @@ export default function CreateReview({ spotId }){
     const reviewInfo = { review, stars, url };
 
     const newReview = await dispatch(
-      createNewReviewTK(reviewInfo, spotId, currentUser)
+      addReviewThunk(reviewInfo, spotId, currentUser)
     ).catch(async (res) => {
       const message = await res.json();
       const messageErrors = [];
@@ -48,9 +49,8 @@ export default function CreateReview({ spotId }){
     });
     if (newReview && !url.length) {
       closeModal();
-      dispatch(getSingleSpotTK(spotId))
+      dispatch(getSingleSpotThunk(spotId))
       history.push(`/spots/${spotId}`);
-      // dispatch(getUserReviewsTK(spotId))
     }
 
   };

@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
-import noImage from '../../images/noimage.jpg';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleSpotTK, acResetSpots } from '../../store/spots';
+import noImg from '../Images/noImg.jpg';
+import { getAllSpotsThunk, getSingleSpotThunk } from '../../store/spots';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './GetSingleSpot.css';
-import SpotReviews from '../Reviews/SpotReviews';
+import CreateReview from '../Reviews';
 import OpenModalButton from '../OpenModalButton';
-import CreateReviewsModal from '../CreateReviewsModal';
+import UpdateReview from '../Reviews';
+
 
 export default function GetSingleSpot() {
   const history = useHistory();
@@ -20,7 +22,7 @@ export default function GetSingleSpot() {
   const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getSingleSpotTK(+spotId));
+    dispatch(getSingleSpotThunk(+spotId));
     history.push(`/spots/${spotId}`);
   }, [dispatch, spotId]);
 
@@ -68,7 +70,7 @@ export default function GetSingleSpot() {
           alt={spot.name}
           src={previewImages}
           onError={(event) => {
-            event.target.src = `${noImage}`;
+            event.target.src = `${noImg}`;
             event.onerror = null;
           }}
         />
@@ -82,17 +84,17 @@ export default function GetSingleSpot() {
                 src={url}
                 key={url}
                 onError={(event) => {
-                  event.target.src = `${noImage}`;
+                  event.target.src = `${noImg}`;
                   event.onerror = null;
                 }}
               />
             ))
           ) : (
             <>
-              <img className="other-image" alt={spot.name} src={noImage} />
-              <img className="other-image" alt={spot.name} src={noImage} />
-              <img className="other-image" alt={spot.name} src={noImage} />
-              <img className="other-image" alt={spot.name} src={noImage} />
+              <img className="other-image" alt={spot.name} src={noImg} />
+              <img className="other-image" alt={spot.name} src={noImg} />
+              <img className="other-image" alt={spot.name} src={noImg} />
+              <img className="other-image" alt={spot.name} src={noImg} />
             </>
           )}
         </div>
@@ -114,7 +116,7 @@ export default function GetSingleSpot() {
         <div className="review-button">
           <OpenModalButton
             buttonText="Leave a Review"
-            modalComponent={<CreateReviewsModal spotId={spotId} />}
+            modalComponent={<CreateReview spotId={spotId} />}
           />
         </div>
       )}
@@ -130,7 +132,7 @@ export default function GetSingleSpot() {
         <span>{spot.numReviews} reviews</span>
       </h2>
       <div className="one-spot-reviews-container">
-        <SpotReviews spotId={spotId} />
+        <UpdateReview spotId={spotId} />
       </div>
       <div className="breaker"></div>
     </div>
