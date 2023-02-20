@@ -1,7 +1,7 @@
 {
   "name": "authentication",
   "version": "1.0.0",
-  "description": "<!-- # Enter avg.BnB --> <!-- # Introducing avg.BnB --> <!-- # Welcome to avg.BnB --> # Welcome to urAvg.BnB <!-- # Welcome to uravg.BnB --> <!-- # Welcome to wd40.BnB -->",
+  "description": "## Database Schema Design",
   "main": "index.js",
   "scripts": {
     "render-postbuild": "npm run build --prefix frontend",
@@ -19,5 +19,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/13illydakid/project-api/issues"
+  },
+  "homepage": "https://github.com/13illydakid/project-api#readme"
 }
