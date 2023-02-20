@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/">
             <GetAllSpots />
           </Route>
-          <Route exact path="/spots/:spotId">
+          <Route path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
           <Route path="/spots/new">
