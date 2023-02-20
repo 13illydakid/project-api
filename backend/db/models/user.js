@@ -43,6 +43,14 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       User.hasMany(
+        models.Review,
+        {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE',
+          hooks: true,
+        }
+      );
+      User.hasMany(
         models.Spot,
         {
           foreignKey: 'ownerId',
@@ -58,14 +66,6 @@ module.exports = (sequelize, DataTypes) => {
           hooks: true,
         }
       );
-      User.hasMany(
-        models.Review,
-        {
-          foreignKey: 'userId',
-          onDelete: 'CASCADE',
-          hooks: true,
-        }
-      );
     }
   }
 
@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
         validate: {
           len: [4, 30],
           isNotEmail(value) {
