@@ -1,51 +1,42 @@
 const express = require('express');
 const router = express.Router();
-const { requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage } = require('../../db/models');
-
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
 const sequelize = require('sequelize');
+const { handleValidationErrors } = require('../../utils/validation');
+const { check } = require('express-validator');
 
-router.delete('/:imageId', requireAuth, async (req, res) => {
-  let { imageId } = req.params;
-  imageId = parseInt(imageId);
-  const imageToDelete = await SpotImage.findOne({
-    where: {
-      id: imageId,
-    },
-  });
+//Delete an Image for a Spot
+router.delete('/:imageId', requireAuth, async(req, res, next)=>{
+    const imageId = req.params.imageId;
+    const selectImage = await SpotImage.findByPk(imageId);
 
-  if (!imageToDelete) {
-    res.status(404);
+    const user = req.user;
+
+    const err = {};
+    if (!selectImage) {
+        err.title = "Couldn't find a Spot Image with the specified id";
+        err.status = 404;
+        err.message = "Spot Image couldn't be found"
+        return next(err)
+    };
+
+    const spot = await selectImage.getSpot();
+
+    /// spot belongs to user
+    if (selectImage.id !== spot.ownerId) {
+        err.title = "Authorization error";
+        err.status = 403;
+        err.message = "Cannot delete image from spot not owned by user"
+        return next(err)
+    };
+
+    selectImage.destroy();
     res.json({
-      message: "Spot Image couldn't be found",
-      statusCode: 404,
-    });
-  }
-  const userId = imageToDelete.spotId;
-  const sessionUserId = req.user.id;
-  const theSpot = await Spot.findOne({
-    where: {
-      id: userId,
-    },
-  });
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+})
 
-  const ownerId = theSpot.id;
 
-  if (sessionUserId !== userId) {
-    const err = new Error('Forbidden');
-    err.status = 403;
-    err.error = 'Forbidden';
-    res.status(403);
-    return res.json(err);
-  }
-
-  if (imageToDelete && sessionUserId === ownerId) {
-    await imageToDelete.destroy();
-    res.status(200);
-    return res.json({
-      statusCode: 200,
-      message: 'Successfully deleted',
-    });
-  }
-});
 module.exports = router;

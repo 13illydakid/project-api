@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'ownerId',
           // onDelete: 'CASCADE',
           // hooks: true
-          // as: 'Owner',
+          as: 'Owner'
         }
       );
       Spot.hasMany(
