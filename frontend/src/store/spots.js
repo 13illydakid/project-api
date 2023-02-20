@@ -72,7 +72,7 @@ export const getAllSpotsThunk = () => async (dispatch) => {
         return spots;
     }
 }
-export const getSingleSpotThunk = () => async (dispatch) => {
+export const getSingleSpotThunk = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`);
     if(res.ok){
         const spot = await res.json();
