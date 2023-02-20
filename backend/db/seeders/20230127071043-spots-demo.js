@@ -8,7 +8,7 @@ options.tableName = 'Spots'
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    // options.tableName = 'Spots';
+    options.tableName = 'Spots';
     return queryInterface.bulkInsert(
       options,
       [
@@ -56,9 +56,34 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(
       options, {
-      country: {
-        [Op.in]: ['Wall Maria', 'Marley', 'Paradis Island']
+      id: {
+        [Op.in]: [1, 2, 3]
       },
     }, {});
   }
 };
+
+// {
+//   ownerId: 1,
+//   address: '0001 Tata',
+//   city: 'San Diego',
+//   state: 'California',
+//   country: 'United States',
+//   lat: ,
+//   lng: ,
+//   name: '',
+//   description: '',
+//   price:
+// },
+// {
+//   ownerId: 2,
+//   address: '',
+//   city: 'Irvine',
+//   state: 'California',
+//   country: 'United States',
+//   lat: ,
+//   lng: ,
+//   name: '',
+//   description: '',
+//   price:
+// },
