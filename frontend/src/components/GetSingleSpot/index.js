@@ -6,7 +6,7 @@ import { getAllSpotsThunk, getSingleSpotThunk } from '../../store/spots';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './GetSingleSpot.css';
-import CreateReview from '../Reviews';
+import SpotReviews from '../Reviews/SpotReviews';
 import OpenModalButton from '../OpenModalButton';
 import UpdateReview from '../Reviews';
 
