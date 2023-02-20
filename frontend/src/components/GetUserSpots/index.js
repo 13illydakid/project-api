@@ -6,6 +6,7 @@ import EditSpot from '../EditSpot';
 import { getAllSpotsThunk, getUserSpotsThunk } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import RemoveSpot from '../RemoveSpot';
+import {noImg} from '../Images/noImg.png';
 import './GetUserSpots.css'
 
 export default function GetUserSpots() {
@@ -55,7 +56,7 @@ export default function GetUserSpots() {
                                             src={spot.previewImage}
                                             alt={spot.id}
                                             onError={(event) => {
-                                                event.target.src = `${noImage}`;
+                                                event.target.src = `${noImg}`;
                                                 event.onerror = null;
                                             }}
                                         />
