@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import elleBnB_Logo from '../images/elleBnB_Logo.jpg';
+import elleBnB_Logo from '../Images/elleBnB_Logo.jpg';
 import CreateSpot from '../CreateSpot';
 import OpenModalButton from '../OpenModalButton';
 import DemoUser from '../DemoUser';
