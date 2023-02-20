@@ -39,7 +39,7 @@ export default function GetSingleSpot() {
     }
   }
 
-  if (!spot?.Owner) return null;
+  if (!spot.Owner) return null;
   if (!Object.keys(spot).length) return null;
   return (
     <div className="singlespot-container">
@@ -50,12 +50,12 @@ export default function GetSingleSpot() {
 
         <div>
           {spot.avgStarRating ? (
-            <span> ★{spot.avgStarRating} · </span>
+            <span>{spot.avgStarRating}</span>
           ) : (
-            <span> New · </span>
+            <span> New</span>
           )}
-          <span>{spot.numReviews} reviews · </span>
-          <span>Superhost · </span>
+          <span>{spot.numReviews} reviews</span>
+          <span>server </span>
           <span className='spot-capitalize'>
             {spot.city}, {spot.state}, {spot.country}
           </span>
