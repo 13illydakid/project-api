@@ -14,12 +14,12 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: 'https://static01.nyt.com/images/2019/06/25/realestate/25domestic-zeff/a1c1a1a36c9e4ff8adcb958c4276f28d-jumbo.jpg',
+          url: 'https://inasianspaces.files.wordpress.com/2019/06/snk-episode-19.png?w=1200',
           preview: true
         },
         {
           spotId: 2,
-          url: 'https://cdn11.bigcommerce.com/s-g95xg0y1db/images/stencil/1280w/carousel/28/pool_house_plan_riverview_exterior__63449.jpg?c=1',
+          url: 'https://i.pinimg.com/originals/8d/bc/f5/8dbcf5e246fdfa6ddca7ddbdd52d12a9.jpg',
           preview: true
         },
         {
