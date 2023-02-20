@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { resetReviews, getSpotReviewsThunk } from '../../store/reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import MyReviews from './MyReviews';
 import noImg from '../Images/noImg.jpg';
 
 // import './Reviews.css';
@@ -10,58 +11,27 @@ export default function SpotReviews({ spotId }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const reviewsObj = useSelector((state) => {
-    return state.reviews.spot;
+    return state.reviews;
   });
 
   const reviewsArr = Object.values(reviewsObj);
 
   useEffect(() => {
-    dispatch(getSpotReviewsThunk(+spotId));
-    return () => {
-      dispatch(resetReviews());
-    };
+    dispatch(getSpotReviewsThunk(spotId));
+    // return () => {
+    //   dispatch(resetReviews());
+    // };
   }, [dispatch]);
 
   if (!reviewsArr.length) return null;
 
   return (
-    <>
-      {reviewsArr.map((review) => (
-        <div>
-          <h3>
-            {review.User.firstName} {review.User.lastName}
-          </h3>
-          <p className='review-date'>{new Date(review.createdAt).toString().slice(3, -42)}</p>
+    <div style={{"margin":"10px", "padding":"0px 10px", "display":"flex", "flexDirection":"column", "border":"lightGray solid 1px", "borderRadius":"10px"}}>
+        <h2 style={{"borderBottom":"solid lightgray 1px", "padding":"10px"}}>Your Reviews:</h2>
 
-          <p>
-            {[...Array(review.stars)].map((star) => (
-              <i className="fa-solid fa-star"></i>
-            ))}
-          </p>
+        {reviewsArr.map((review) => (
+            <MyReviews key={review.id} {...review}/>  ))}
+            </div>
 
-          <p>
-            <i className="fa fa-light fa-fire" aria-hidden="true"></i>{' '}
-            <span>{review.review}</span>{' '}
-            <i className="fa fa-light fa-fire" aria-hidden="true"></i>
-          </p>
-          <div>
-            {review.ReviewImages &&
-              review.ReviewImages.map((image) => {
-                return (
-                  <img
-                    className="spot-review-image"
-                    src={image.url}
-                    key={image.url}
-                    onError={(event) => {
-                      event.target.src = `${noImg}`;
-                      event.onerror = null;
-                    }}
-                  />
-                );
-              })}
-          </div>
-        </div>
-      ))}
-    </>
-  );
+        )
 };

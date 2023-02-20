@@ -1,13 +1,14 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeReviewThunk } from '../../store/reviews';
+import { useSelector } from 'react-redux';
 
-export default function MyReviews({ review }) {
+export default function MyReviews({ reviewId, review }) {
   const dispatch = useDispatch();
   const history = useHistory();
-
+    // const review = useSelector((state)=>state.spot.user);
   const deleteReviewHandleClick = async () => {
-    await dispatch(removeReviewThunk(review.id));
+    await dispatch(removeReviewThunk(reviewId));
   };
 
   return (

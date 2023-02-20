@@ -19,7 +19,7 @@ export default function GetSingleSpot() {
   const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getSingleSpotThunk(+spotId));
+    dispatch(getSingleSpotThunk(spotId));
     history.push(`/spots/${spotId}`);
   }, [dispatch, spotId]);
 
