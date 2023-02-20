@@ -29,7 +29,7 @@
   outline: none;
 }
 
-.create-spot-form .submitButton {
+.create-spot-form .modal-submit-button {
   width: 100%;
   background-color: #4CAF50;
   color: white;
@@ -41,6 +41,6 @@
   transition: 0.5s;
 }
 
-.create-spot-form .submitButton:hover {
+.create-spot-form .modal-submit-button:hover {
   background-color: #3e8e41;
 }

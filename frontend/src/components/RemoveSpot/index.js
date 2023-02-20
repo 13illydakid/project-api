@@ -1,48 +1,42 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { removeSpotThunk } from '../../store/spots';
+import { Link } from 'react-router-dom';
+import { getAllSpots, removeSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
-import './RemoveSpot.css';
+// import './RemoveSpot.css';
 
-export default function RemoveSpot({spotId}) {
+export default function RemoveSpot(spot) {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const { noModal } = useModal();
+    // const history = useHistory();
+    // const { noModal } = useModal();
     // const thisSpot = spot.spot;
 
-    const [error, setError] = useState([]);
-    const revert = (i) => {
-        i.preventDefault();
-        noModal();
-    }
-    const deleteNow = async (i) => {
-        i.preventDefault();
-        const deletion = await dispatch(
-            removeSpotThunk(spotId)
-        ).catch(async (res) => {
-            const datas = await res.json();
-            if (datas) {
-                if (datas.error) {
-                    setError(datas.error);
-                }
+    // const [error, setError] = useState([]);
+    // const revert = (i) => {
+    //     i.preventDefault();
+    //     noModal();
+    // }
+        const deletion = async()=> {
+            const elem = await dispatch(removeSpotThunk(spot.id));
+            await dispatch(getAllSpots());
+            if(elem){
+                console.log("Removed.");
             }
-        });
-        noModal();
-        history.pushState('/');
+        }
+        // noModal();
+        // history.pushState('/');
+    if(!spot){
+        return null;
     }
 
     return (
-        <div className="form-div">
-            <h1 className="title">Confirm deletion of this Spot</h1>
-            <ul className="error">
-                {error.map((err, j) => {
-                    <li key={j}>{err}</li>
-                })}
-            </ul>
-            <form className="form">
-                <button type="submit" className="submit-button" id="removeSpot-button" onClick={deleteNow}>Delete Now</button>
-            </form>
+        <div style={{"display":"flex", "justifyContent":"space-between", "alignContent":"center", "gap":"40px"}}>
+            <h3>{spot.name}</h3>
+            <div style={{"display":"flex", "justifyContent":"space-between", "alignContent":"center"}}>
+                <button><Link to={`/spots/${spot.id}/edit`}>Edit</Link></button>
+                <button onClick={deletion}>Delete</button>
+            </div>
         </div>
     )
 }

@@ -67,7 +67,7 @@ export default function ProfileButton({ user }) {
                 </div>
               </NavLink>
             </div>
-            <NavLink exact to="/current">
+            <NavLink exact to="/spots/current">
               <div className="menu-button">
                 <button>My Spots</button>
               </div>

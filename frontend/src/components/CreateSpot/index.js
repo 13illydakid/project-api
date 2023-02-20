@@ -10,8 +10,8 @@ export default function CreateSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [url, setUrl] = useState('');
-  // const [lat, setLat] = useState('');
-  // const [lng, setLng] = useState('');
+  const [lat, setLat] = useState('');
+  const [lng, setLng] = useState('');
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [price, setPrice] = useState('');
@@ -28,9 +28,9 @@ export default function CreateSpot() {
       address,
       state,
       city,
-      // lat,
+      lat,
       country,
-      // lng,
+      lng,
       name,
       description,
       price,
@@ -110,9 +110,9 @@ export default function CreateSpot() {
               />
             </label>
           </div>
-{/*
+
           <div>
-            <label className="form-label">
+            <label>
               lat
               <input
                 type="decimel"
@@ -123,10 +123,10 @@ export default function CreateSpot() {
                 onChange={(e) => setLat(e.target.value)}
               />
             </label>
-          </div> */}
+          </div>
 
-          {/* <div>
-            <label className="form-label">
+          <div>
+            <label>
               lng
               <input
                 type="decimel"
@@ -137,7 +137,7 @@ export default function CreateSpot() {
                 onChange={(e) => setLng(e.target.value)}
               />
             </label>
-          </div> */}
+          </div>
 
           <div>
             <label>
