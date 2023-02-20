@@ -43,17 +43,18 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       User.hasMany(
-        models.Review,
+        models.Spot,
         {
-          foreignKey: 'userId',
+          foreignKey: 'ownerId',
+          as: 'Owner',
           onDelete: 'CASCADE',
           hooks: true,
         }
       );
       User.hasMany(
-        models.Spot,
+        models.Review,
         {
-          foreignKey: 'ownerId',
+          foreignKey: 'userId',
           onDelete: 'CASCADE',
           hooks: true,
         }

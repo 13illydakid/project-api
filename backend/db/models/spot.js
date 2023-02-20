@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         models.User,
         {
           foreignKey: 'ownerId',
-          // as: 'Owner',
+          as: 'Owner',
         }
       );
       Spot.hasMany(
