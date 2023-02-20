@@ -26,7 +26,7 @@ module.exports = {
           spotId: 3,
           url: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_33/1599433/pie-house-mc-main1-2008118.jpg',
           preview: true
-        },
+        }
         // {
         //   spotId: 4,
         //   url: 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_33/1599433/pie-house-mc-main1-2008118.jpg',
