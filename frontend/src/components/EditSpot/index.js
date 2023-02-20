@@ -60,8 +60,8 @@ export default function EditSpot(spotId) {
     };
     // const spotId = spot.id;
     dispatch(editSpotThunk(data, spotId))
-      .then((res) => noModal())
-      .then((res) => history.push(`/spots/${spotId}`))
+      .then(() => noModal())
+      .then(() => history.push(`/spots/${spotId}`))
       .catch(async (res) => {
         if (res === undefined) return null;
         const message = await res.json();
@@ -77,7 +77,7 @@ export default function EditSpot(spotId) {
     const handleCancelClick = (e) => {
       e.preventDefault();
       noModal()
-      history.push("/spots/current");
+      history.push(`/spots/current`);
     };
 
   return (

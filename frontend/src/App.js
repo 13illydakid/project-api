@@ -8,7 +8,7 @@ import GetSingleSpot from "./components/GetSingleSpot";
 import GetUserSpots from "./components/GetUserSpots";
 import CreateSpot from "./components/CreateSpot";
 import EditSpot from "./components/EditSpot";
-import RemoveSpot from "./components/RemoveSpot";
+// import RemoveSpot from "./components/RemoveSpot";
 import UserReviews from './components/Reviews/UserReviews';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
@@ -28,7 +28,7 @@ function App() {
           <Route exact path="/">
             <GetAllSpots />
           </Route>
-          <Route path="/spots/:spotId">
+          <Route exact path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
           <Route path="/spots/new">
@@ -43,9 +43,9 @@ function App() {
           <Route path="/spots/:spotId/edit">
             <EditSpot />
           </Route>
-          <Route exact path="/">
+          {/* <Route path="/">
             <RemoveSpot />
-          </Route>
+          </Route> */}
           <Route><PageNotFound /></Route>
         </Switch>
       )}

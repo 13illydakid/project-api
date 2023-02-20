@@ -27,7 +27,7 @@ export default function GetAllSpots() {
         <>
           <div className="wrapper-center">
             <div className="allspot-container">
-              {spotsValues.map((spot) => (
+              {Object.values(spotsValues).map((spot) => (
                 <Spot key={spot.id} spot={spot} />
               ))}
             </div>

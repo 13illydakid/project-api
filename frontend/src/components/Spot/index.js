@@ -1,19 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch , useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getSingleSpotThunk } from '../../store/spots';
 import noImg from '../Images/noImg.jpg';
-export default function Spot({ spot }) {
+export default function Spot( spotId ) {
+    const spot = useSelector((state) => state.spots.singleSpot)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getSingleSpotThunk(spotId))
+      }, [dispatch, spotId])
   return (
     <div className="outer-container">
       <Link
         style={{ textDecoration: 'none', color: 'black' }}
-        to={`/spots/${spot.id}`}
+        to={`/spots/${spotId}`}
+        // to={"/spots/:spotId"}
       >
         <div className="allspot-image-container">
           {spot.previewImage ? (
             <div>
               <img
                 src={spot.previewImage}
-                // alt={'image not found'}
+
                 onError={(event) => {
                   event.target.src =
                     `${noImg}`;
@@ -36,9 +45,9 @@ export default function Spot({ spot }) {
 
             <div>
               {spot.avgRating ? (
-                <span>★ {spot.avgRating}</span>
+                <span>{spot.avgRating}</span>
               ) : (
-                <span>★ New</span>
+                <span> New</span>
               )}
             </div>
           </div>
