@@ -10,6 +10,7 @@ const {
   Booking,
 } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { restoreUser } = require('../../utils/auth.js');
 const { Op } = require('sequelize');
 const spot = require('../../db/models/spot');
 const { check } = require('express-validator');
@@ -660,7 +661,7 @@ router.post('/:id/bookings', requireAuth, async (req, res) => {
   return res.json(createBooking);
 });
 // 🔴 Delete spot
-router.delete('/:spotId', requireAuth, async (req, res) => {
+router.delete('/:spotId', requireAuth, restoreUser, async (req, res) => {
   let { spotId } = req.params;
   spotId = parseInt(spotId);
   const spotToDelete = await Spot.findOne({
