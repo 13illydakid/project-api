@@ -6,7 +6,7 @@ import EditSpot from '../EditSpot';
 import { getAllSpotsThunk, getUserSpotsThunk } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import RemoveSpot from '../RemoveSpot';
-import {noImg} from '../Images/noImg.png';
+import noImg from '../Images/noImg.jpg';
 import './GetUserSpots.css'
 
 export default function GetUserSpots() {

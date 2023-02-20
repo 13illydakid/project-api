@@ -22,7 +22,7 @@ export default function Navigation({ isLoaded }) {
           >
             <div className="logowrapper">
               <img className="logo" src={elleBnB_Logo} style={{ height: '80px' }} />
-              <span>FireBnb</span>
+              <span>elleBnB</span>
             </div>
           </NavLink>
         </div>
@@ -35,7 +35,7 @@ export default function Navigation({ isLoaded }) {
         {sessionUser && (
           <div className="create-spot-main">
             <OpenModalButton
-              buttonText="Firebnb your home !"
+              buttonText="elleBnB"
               modalComponent={<CreateSpot />}
             />
           </div>

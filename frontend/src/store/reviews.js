@@ -6,6 +6,7 @@ const GET_USER_REVIEWS = 'spot/GET_USER_REVIEWS';
 const ADD_REVIEW = 'spot/ADD_REVIEW';
 const EDIT_REVIEW = 'spot/EDIT_REVIEW';
 const REMOVE_REVIEW = 'spot/REMOVE_REVIEW';
+const RESET_REVIEWS = 'reviews/RESET_REVIEWS';
 
 // action creators
 export const getSpotReviews = (reviews) => {
@@ -42,6 +43,11 @@ export const removeReview = (reviewId) => {
         reviewId
     }
 }
+export const resetReviews = () => {
+    return {
+      type: RESET_REVIEWS,
+    };
+  }
 
 // thunks
 export const getSpotReviewsThunk = (spotId) => async (dispatch) => {
@@ -133,6 +139,12 @@ const reviewsReducer = (state=initialState, action) => {
             newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
             delete newState.spot[action.reviewId]
             delete newState.user[action.reviewId]
+            return newState;
+        }
+        case RESET_REVIEWS: {
+            newState = { ...state };
+            newState.user = {};
+            newState.spot = {};
             return newState;
         }
         default:

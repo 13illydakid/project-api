@@ -8,6 +8,7 @@ import GetSingleSpot from "./components/GetSingleSpot";
 import GetUserSpots from "./components/GetUserSpots";
 import CreateSpot from "./components/CreateSpot";
 import EditSpot from "./components/EditSpot";
+import UserReviews from './components/Reviews/UserReviews';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/spots/current">
             <GetUserSpots />
+          </Route>
+          <Route exact path="/myreviews">
+            <UserReviews />
           </Route>
           <Route path="/spots/:spotId/edit">
             <EditSpot />
