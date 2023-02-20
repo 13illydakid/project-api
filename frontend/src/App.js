@@ -8,6 +8,8 @@ import GetSingleSpot from "./components/GetSingleSpot";
 import GetUserSpots from "./components/GetUserSpots";
 import CreateSpot from "./components/CreateSpot";
 import EditSpot from "./components/EditSpot";
+import PageNotFound from './components/PageNotFound';
+import Footer from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,9 +38,10 @@ function App() {
           <Route path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
-          <Route>Page not found</Route>
+          <Route><PageNotFound /></Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

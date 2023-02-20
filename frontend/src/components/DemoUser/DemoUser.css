@@ -1,0 +1,11 @@
+#demouser {
+    color: rgb(255, 90, 96);
+    font-weight: bold;
+    border: none;
+    padding-right:15px ;
+    transition: 1s;
+  }
+  #demouser:hover{
+    font-size: 14px;
+    color: black;
+  }
