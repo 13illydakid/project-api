@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import GetAllSpots from "./components/Spots/GetAllSpots/GetAllSpots";
-import GetSingleSpot from "./components/Spots/GetSingleSpot/GetSingleSpot";
-import CreateSpot from "./components/Spots/CreateSpot/CreateSpot";
-import EditSpot from "./components/Spots/EditSpot/EditSpot";
+import GetAllSpots from "./components/GetAllSpots";
+import GetSingleSpot from "./components/GetSingleSpot";
+import GetUserSpot from "./components/GetUserSpot";
+import CreateSpot from "./components/CreateSpot";
+import EditSpot from "./components/EditSpot";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App() {
             <CreateSpot />
           </Route>
           <Route path="/spots/current">
-            <UserSpots />
+            <GetUserSpot />
           </Route>
           <Route path="/spots/:spotId/edit">
             <EditSpot />

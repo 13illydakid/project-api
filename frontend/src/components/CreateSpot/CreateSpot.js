@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createSpotThunk } from '../../../store/spots';
-import { useModal } from '../../../context/Modal';
+import { createSpotThunk } from '../../store/spots';
+import { useModal } from '../../context/Modal';
 import '.CreateSpot.css';
 
-export default function CreateSpotForm() {
+export default function CreateSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
     const { noModal } = useModal();
@@ -20,7 +20,7 @@ export default function CreateSpotForm() {
     const [price, setPrice] = useState("");
     const [error, setError] = useState([]);
     const [preview, setPreview] = useState(true);
-    const [ url, setUrl ] = useState("");
+    const [url, setUrl] = useState("");
 
     const submitNow = (i) => {
         i.preventDefault();
@@ -62,7 +62,7 @@ export default function CreateSpotForm() {
                 <div>
                     <div className="title">Add a Spot</div>
                     <div className="errors">
-                        { error.map((err, j)=> <div key={j}>{err}</div>) }
+                        {error.map((err, j) => <div key={j}>{err}</div>)}
                     </div>
 
                     // inputs **("add placeholders??")
@@ -72,7 +72,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={address}
                             required
-                            onChange={(e)=>setAddress(e.target.value)}
+                            onChange={(e) => setAddress(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -81,7 +81,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={city}
                             required
-                            onChange={(e)=>setCity(e.target.value)}
+                            onChange={(e) => setCity(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -90,7 +90,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={state}
                             required
-                            onChange={(e)=>setState(e.target.value)}
+                            onChange={(e) => setState(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -99,7 +99,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={country}
                             required
-                            onChange={(e)=>setCountry(e.target.value)}
+                            onChange={(e) => setCountry(e.target.value)}
                         />
                     </div>
                     {/* <div className="inputs">
@@ -126,7 +126,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={name}
                             required
-                            onChange={(e)=>setName(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -135,7 +135,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={description}
                             required
-                            onChange={(e)=>setDescription(e.target.value)}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -144,7 +144,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={price}
                             required
-                            onChange={(e)=>setPrice(e.target.value)}
+                            onChange={(e) => setPrice(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -153,7 +153,7 @@ export default function CreateSpotForm() {
                             type="text"
                             value={url}
                             required
-                            onChange={(e)=>setUrl(e.target.value)}
+                            onChange={(e) => setUrl(e.target.value)}
                         />
                     </div>
                     <div className="inputs">
@@ -162,7 +162,7 @@ export default function CreateSpotForm() {
                             type="url"
                             value={preview}
                             required
-                            onChange={(e)=>setPreview(e.target.value)}
+                            onChange={(e) => setPreview(e.target.value)}
                         />
                     </div>
 

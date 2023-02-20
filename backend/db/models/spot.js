@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: true
+      autoIncrement: true,
+      primaryKey: true
       // onDelete: 'CASCADE'
     },
     address: {

@@ -4,7 +4,7 @@ import { getAllSpotsThunk } from '../../store/spots';
 //import Spots from './Spots';
 import './GetAllSpots.css';
 // import { useHistory } from 'react-router-dom';
-const GetAllSpots = () => {
+export default function GetAllSpots() {
     const dispatch = useDispatch();
     // const history = useHistory();
     const obj = useSelector(state => state.spots.allSpots);
@@ -30,5 +30,3 @@ const GetAllSpots = () => {
         </div>
     )
 }
-
-export default GetAllSpots;

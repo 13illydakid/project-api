@@ -133,9 +133,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ownerId: {
-        type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
         // onDelete: "CASCADE"
       },
       firstName: {

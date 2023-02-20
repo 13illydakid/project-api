@@ -9,7 +9,7 @@ import SpotReviews from '../Reviews/SpotReviews';
 import OpenModalButton from '../OpenModalButton';
 import CreateReviewsModal from '../CreateReviewsModal';
 
-export default function LoadSingleSpot() {
+export default function GetSingleSpot() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { spotId } = useParams();

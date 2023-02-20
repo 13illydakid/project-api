@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 // import thunks once you make them
 import { useModal } from '../../context/Modal'
 import { getSingleSpotThunk } from '../../store/spots';
-export default function createReview({ spotId }){
+export default function CreateReview({ spotId }){
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
