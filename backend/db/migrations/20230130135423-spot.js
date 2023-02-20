@@ -12,10 +12,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      // ownerId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: false,
+      //   references: { model: 'Users', key: 'id' },
+      //   onDelete: "CASCADE"
+      // },
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users', key: 'id' },
+        references: { model: 'Users' },
         onDelete: "CASCADE"
       },
       address: {
