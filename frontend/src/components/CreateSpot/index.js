@@ -1,189 +1,209 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { createSpotThunk } from '../../store/spots';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
+import { createSpotThunk } from '../../store/spots';
 import './CreateSpot.css';
 
 export default function CreateSpot() {
-    const dispatch = useDispatch();
-    const user = useSelector((state)=> state.session.User);
-    if(!user){
-        history.push('/');
-    }
-    const {spotId} = useParams();
-    const history = useHistory();
-    const { noModal } = useModal();
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [ lat, setLat ] = useState("");
-    const [ lng, setLng ] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [error, setError] = useState([]);
-    const [preview, setPreview] = useState(true);
-    const [url, setUrl] = useState("");
+  const { closeModal } = useModal();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [url, setUrl] = useState('');
+  // const [lat, setLat] = useState('');
+  // const [lng, setLng] = useState('');
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [price, setPrice] = useState('');
+  const [state, setState] = useState('');
+  const [errors, setErrors] = useState([]);
+  const [address, setAddress] = useState('');
+  const [country, setCountry] = useState('');
+  const [preview, setPreview] = useState(true);
+  const [description, setDescription] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            address,
-            city,
-            state,
-            country,
-            name,
-            description,
-            price,
-            url
-        }
-        const imageData = {
-            url,
-            preview
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      address,
+      state,
+      city,
+      // lat,
+      country,
+      // lng,
+      name,
+      description,
+      price,
+      url,
+    };
+    const imgData = { url, preview };
 
-        dispatch(createSpotThunk(data, imageData))
-            .then((newSpot) => {
-                history.push(`/spots/${newSpot.id}`)
-            })
-            .then(noModal)
-            .catch(async (res) => {
-                if (res === undefined) {
-                    return null;
-                }
-                const elem = await res.json();
-                if (elem) {
-                    if (elem.error) {
-                        setError(elem.error);
-                    }
-                }
-            });
-    }
+    dispatch(createSpotThunk(data, imgData))
+      .then((newSpot) => history.push(`/spots/${newSpot.id}`))
+      .then(closeModal)
+      .catch(async (res) => {
+        if (res === undefined) return null;
+        const message = await res.json();
+        if (message && message.errors) setErrors(message.errors);
+      });
+  };
 
-    // jsx
-
-    return (
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <div className="title">Add a Spot</div>
-                    <div className="errors">
-                        {error.map((err, id) => <div key={id}>{err}</div>)}
-                    </div>
-
-                    // inputs **("add placeholders??")
-                    <div className="inputs">
-                        <label>Address</label>
-                        <input
-                            type="text"
-                            value={address}
-                            required
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>City</label>
-                        <input
-                            type="text"
-                            value={city}
-                            required
-                            onChange={(e) => setCity(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>State</label>
-                        <input
-                            type="text"
-                            value={state}
-                            required
-                            onChange={(e) => setState(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Country</label>
-                        <input
-                            type="text"
-                            value={country}
-                            required
-                            onChange={(e) => setCountry(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Lat</label>
-                        <input
-                            type="text"
-                            value={lat}
-                            required
-                            onChange={(e)=>setLat(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Lng</label>
-                        <input
-                            type="text"
-                            value={lng}
-                            required
-                            onChange={(e)=>setLng(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            value={name}
-                            required
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Description</label>
-                        <input
-                            type="text"
-                            value={description}
-                            required
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Price</label>
-                        <input
-                            type="text"
-                            value={price}
-                            required
-                            onChange={(e) => setPrice(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>URL</label>
-                        <input
-                            type="text"
-                            value={url}
-                            required
-                            onChange={(e) => setUrl(e.target.value)}
-                        />
-                    </div>
-                    <div className="inputs">
-                        <label>Preview</label>
-                        <select
-                            // type="url"
-                            // required
-                            value={preview}
-                            onChange={(e) => setPreview(e.target.value)}
-                        >
-                            <option key="false">false</option>
-                            <option key="true">true</option>
-                        </select>
-                    </div>
-
-                    // Submit Button
-                    <div>
-                        <button className="submit-button" type="submit">Create Spot</button>
-                    </div>
+  return (
+    <div>
+      <form className="create-spot-form" onSubmit={handleSubmit}>
+        {/* <div>Please Fill Below!</div> */}
+        <div>
+          <div>Create your spot</div>
+          <ul>
+            {errors &&
+              errors.map((error, id) => (
+                <div style={{ color: 'red' }} key={id}>
+                  {error}
                 </div>
+              ))}
+          </ul>
 
-            </form>
+          <div>
+            <label>
+              Address
+              <input
+                type="text"
+                required
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              City
+              <input
+                type="text"
+                required
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              State
+              <input
+                type="text"
+                required
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Country
+              <input
+                type="text"
+                required
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </label>
+          </div>
+{/*
+          <div>
+            <label className="form-label">
+              lat
+              <input
+                type="decimel"
+                min="-80"
+                max="80"
+                placeholder="55.523"
+                value={lat}
+                onChange={(e) => setLat(e.target.value)}
+              />
+            </label>
+          </div> */}
+
+          {/* <div>
+            <label className="form-label">
+              lng
+              <input
+                type="decimel"
+                min="-180"
+                max="180"
+                placeholder="66.432"
+                value={lng}
+                onChange={(e) => setLng(e.target.value)}
+              />
+            </label>
+          </div> */}
+
+          <div>
+            <label>
+              Spot name
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Description
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Price a night $
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Img url
+              <input
+                type="text"
+                placeholder="http://"
+                required
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Set Preview Image
+              <select
+                onChange={(e) => setPreview(e.target.value)}
+                value={preview}
+              >
+                <option key="false">false</option>
+                <option key="true">true</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <button className="modal-submit-button" type="submit">
+              Create new Spot !
+            </button>
+          </div>
         </div>
-    )
-}
+      </form>
+    </div>
+  );
+};

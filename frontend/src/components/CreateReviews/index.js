@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addReviewThunk, getUserReviewsThunk } from '../../store/reviews';
+import { addReviewThunk } from '../../store/reviews';
 import { useModal } from '../../context/Modal'
 import { getSingleSpotThunk } from '../../store/spots';
 export default function CreateReviews({ spotId }) {

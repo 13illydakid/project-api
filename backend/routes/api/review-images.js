@@ -1,41 +1,58 @@
 const express = require('express');
 const router = express.Router();
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Spot, SpotImage, Review, ReviewImage, Booking } = require('../../db/models');
-const sequelize = require('sequelize')
-const { handleValidationErrors } = require('../../utils/validation');
-const { check } = require('express-validator');
+const { requireAuth } = require('../../utils/auth.js');
+const review = require('../../db/models/review');
 
-//Delete an Image for a Review
-router.delete('/:imageId', requireAuth, async(req, res, next)=>{
-    const user = req.user;
-    const imageId = req.params.imageId;
-    const selectImage = await ReviewImage.findByPk(imageId);
+const {
+  Spot,
+  Review,
+  ReviewImage,
+  User,
+  SpotImage,
+  Booking,
+  sequelize,
+} = require('../../db/models');
 
-    const err = {};
-    if (!selectImage) {
-        err.title = "Couldn't find a Review Image with the specified id";
-        err.status = 404;
-        err.message = "Review Image couldn't be found"
-        return next(err)
-    };
+//🔴 Delete a Review Image
+router.delete('/:imageId', requireAuth, async (req, res) => {
+  let { imageId } = req.params;
+  imageId = parseInt(imageId);
+  const reviewImageToDelete = await ReviewImage.findOne({
+    where: {
+      id: imageId,
+    },
+    include: [
+      {
+        model: Review,
+      },
+    ],
+  });
 
-    const review = await selectImage.getReview();
-    /// If review belongs to user
-    if (user.id !== review.userId) {
-        err.title = "Authorization error";
-        err.status = 403;
-        err.message = "Cannot delete image from review not left by user"
-        return next(err)
-    };
-
-    selectImage.destroy();
+  if (!reviewImageToDelete) {
+    res.status(404);
     res.json({
-        "message": "Successfully deleted",
-        "statusCode": 200
+      message: "Review Image couldn't be found",
+      statusCode: 404,
     });
+  }
+  const userId = reviewImageToDelete.Review.userId;
+  const sessionUserId = req.user.id;
+  if (userId !== sessionUserId) {
+    const err = new Error('Forbidden');
+    err.error = 'Forbidden';
+    err.status = 403;
+    res.status(403);
+    res.json(err);
+  }
+
+  if (userId === sessionUserId && reviewImageToDelete) {
+    await reviewImageToDelete.destroy();
+    res.status(200);
+    res.json({
+      statusCode: 200,
+      message: 'Successfully deleted',
+    });
+  }
 });
-
-
 
 module.exports = router;

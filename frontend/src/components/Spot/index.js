@@ -1,34 +1,53 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import OpenModalButton from "../OpenModalButton";
-import { useHistory } from "react-router-dom";
-import RemoveSpot from "../RemoveSpot";
-import './Spot.css'
-import { useSelector } from 'react-redux'
-export default function Spot({spot}){
-    const path = window.location.href.split('/').pop()
-    const history = useHistory()
-    // const spot1 = useSelector(state=>state.allSpots[spot])
-    return(
-        <div className='spot-card'>
-        <Link  key={spot.id} to={`/spots/${spot.id}`}>
-            <img  className="spot-card-prev-image" src={spot.previewImage} alt={spot.name}/>
-            <div  className='spot-preview-info'>
-                <div>
-                    <h4>{spot.name}</h4>
-                    <h4>${spot.price} night</h4>
-                </div>
-                <span className='ratings-span'><i className="fa-sharp fa-solid fa-star"></i> {spot.avgRating>0?parseFloat(spot.avgRating).toFixed(1):'New'}</span>
+import noImg from '../Images/noImg.jpg';
+export default function Spot({ spot }) {
+  return (
+    <div className="outer-container">
+      <Link
+        style={{ textDecoration: 'none', color: 'black' }}
+        to={`/spots/${spot.id}`}
+      >
+        <div className="allspot-image-container">
+          {spot.previewImage ? (
+            <div>
+              <img
+                src={spot.previewImage}
+                // alt={'image not found'}
+                onError={(event) => {
+                  event.target.src =
+                    `${noImg}`;
+                  event.onerror = null;
+                }}
+              />
             </div>
-        </Link>
-            {path==='current'?(
-                <div className='delete-update-div'>
-                    <button onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
-                    <OpenModalButton
-                    buttonText="Delete"
-                    modalComponent={<RemoveSpot spotId={spot.id}/>}
-                    />
-                </div>
-            ):(<></>)}
+          ) : (
+            <div>
+              <img style={{ height: '50px' }} src={noImg} alt="noimage" />
+            </div>
+          )}
         </div>
-    )
+
+        <div>
+          <div>
+            <div className="allspot-location">
+              {spot.city}, {spot.state}
+            </div>
+
+            <div>
+              {spot.avgRating ? (
+                <span>★ {spot.avgRating}</span>
+              ) : (
+                <span>★ New</span>
+              )}
+            </div>
+          </div>
+          <div className="allspot-country">{spot.country}</div>
+          <div className="allspot-price">
+            ${spot.price} <span className="no">night</span>
+          </div>
+        </div>
+      </Link>
+    </div>
+  );
 }

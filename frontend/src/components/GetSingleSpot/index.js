@@ -1,21 +1,18 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import noImg from '../Images/noImg.jpg';
-import { getAllSpotsThunk, getSingleSpotThunk } from '../../store/spots';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSingleSpotThunk } from '../../store/spots';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import './GetSingleSpot.css';
 import SpotReviews from '../Reviews/SpotReviews';
 import OpenModalButton from '../OpenModalButton';
-import UpdateReview from '../Reviews';
-
+import CreateReviews from '../CreateReviews';
 
 export default function GetSingleSpot() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { spotId } = useParams();
-
   const spot = useSelector((state) => {
     return state.spots.singleSpot;
   });
@@ -116,7 +113,7 @@ export default function GetSingleSpot() {
         <div className="review-button">
           <OpenModalButton
             buttonText="Leave a Review"
-            modalComponent={<CreateReview spotId={spotId} />}
+            modalComponent={<CreateReviews spotId={spotId} />}
           />
         </div>
       )}
@@ -132,7 +129,7 @@ export default function GetSingleSpot() {
         <span>{spot.numReviews} reviews</span>
       </h2>
       <div className="one-spot-reviews-container">
-        <UpdateReview spotId={spotId} />
+        <SpotReviews spotId={spotId} />
       </div>
       <div className="breaker"></div>
     </div>

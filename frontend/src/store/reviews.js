@@ -66,19 +66,39 @@ export const getUserReviewsThunk = () => async (dispatch) => {
         return reviews;
     }
 }
-export const addReviewThunk = (spotId, review, user) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }, body: JSON.stringify(review)
-    });
-    if(res.ok){
-        const review = await res.json();
-        review.User = user;
-        dispatch(addReview(review));
-        return review;
-    }
+export const addReviewThunk = (newReview, spotId, user) => async (dispatch) => {
+        const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newReview),
+        });
+
+        if (!res.ok) {
+          let error;
+          if (res.status === 403) {
+            error = await res.json();
+            return error.message;
+
+          }
+          console.log(error)
+        }
+
+        if (res.ok) {
+          const newReview = await res.json();
+          const userInfo = {};
+          userInfo.id = user.id;
+          userInfo.firstName = user.firstName;
+          userInfo.lastName = user.lastName;
+          newReview.User = userInfo;
+          newReview.ReviewImages = [];
+
+          dispatch(addReview(newReview));
+
+          return newReview;
+        } else {
+          const result = await res.json();
+          return result;
+        }
 }
 export const editReviewThunk = (reviewId, review) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -114,31 +134,40 @@ const reviewsReducer = (state=initialState, action) => {
     let newState;
     switch(action.type){
         case GET_SPOT_REVIEWS: {
-            newState = { ...state, spot: {} }
-            action.reviews.Reviews.forEach((review) => {
-                newState.spot[review.id] = review
+            newState = { ...state };
+            const normalizedReview = {};
+            action.reviews.forEach((review) => {
+              normalizedReview[review.id] = review;
             });
+            newState.spot = normalizedReview;
+            newState.user = {};
             return newState;
         }
         case GET_USER_REVIEWS: {
-            newState = { ...state, user: { ...state.user } }
-            action.reviews.Reviews.forEach((review) => {
-                newState.user[review.id] = review
-            });
+            newState = { ...state };
+            const normalizedUserReviews = {};
+            action.reviews.forEach(
+              (review) => (normalizedUserReviews[review.id] = review)
+            );
+            newState.user = normalizedUserReviews;
+            newState.spot = {};
             return newState;
         }
         case ADD_REVIEW: {
-            newState = { ...state, spot: { ...state.spot } }
-            newState.spot[action.review.id] = action.review
+            newState = { ...state };
+            newState.user = { ...state.user };
+            newState.spot = { ...state.spot, [action.review.id]: action.review };
             return newState;
         }
         case EDIT_REVIEW: {
             return { ...state, spot: { ...state.spot, [action.review.id]: action.review } }
         }
         case REMOVE_REVIEW: {
-            newState = { ...state, spot: { ...state.spot }, user: { ...state.user } }
-            delete newState.spot[action.reviewId]
-            delete newState.user[action.reviewId]
+            newState = { ...state };
+            newState.spot = { ...state.spot };
+            newState.user = { ...state.user };
+            delete newState.spot[action.reviewId];
+            delete newState.user[action.reviewId];
             return newState;
         }
         case RESET_REVIEWS: {
