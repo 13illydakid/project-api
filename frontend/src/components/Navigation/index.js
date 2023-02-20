@@ -1,71 +1,54 @@
-// import React from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import ProfileButton from './ProfileButton';
-// import OpenModalButton from '../OpenModalButton';
-// import LoginFormModal from '../LoginFormModal';
-// import SignupFormModal from '../SignupFormModal';
-// import './Navigation.css';
-
-// function Navigation({ isLoaded }){
-//   const sessionUser = useSelector(state => state.session.user);
-
-//   let sessionLinks;
-//   if (sessionUser) {
-//     sessionLinks = (
-//       <li>
-//         <ProfileButton user={sessionUser} />
-//       </li>
-//     );
-//   } else {
-//     sessionLinks = (
-//       <li>
-//         <OpenModalButton
-//           buttonText="Log In"
-//           modalComponent={<LoginFormModal />}
-//         />
-//         <OpenModalButton
-//           buttonText="Sign Up"
-//           modalComponent={<SignupFormModal />}
-//         />
-//       </li>
-//     );
-//   }
-
-//   return (
-//     <ul>
-//       <li>
-//         <NavLink exact to="/">Home</NavLink>
-//       </li>
-//       {isLoaded && sessionLinks}
-//     </ul>
-//   );
-// }
-
-// export default Navigation;
-
-// frontend/src/components/Navigation/index.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+import elleBnB_Logo from '../images/elleBnB_Logo.jpg';
+import CreateSpotModal from '../CreateSpotModal';
+import OpenModalButton from '../OpenModalButton';
+import DemoUser from '../DemoUser';
+export default function Navigation({ isLoaded }) {
+  const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
+    <>
+      <div className="wrapper">
+        <div>
+          <NavLink
+            style={{ textDecoration: 'none' }}
+            className="logo"
+            exact
+            to="/"
+          >
+            <div className="logowrapper">
+              <img className="logo" src={elleBnB_Logo} style={{ height: '80px' }} />
+              <span>FireBnb</span>
+            </div>
+          </NavLink>
+        </div>
+
+        {!sessionUser && (
+          <div className="demo-user-main">
+            <DemoUser />
+          </div>
+        )}
+        {sessionUser && (
+          <div className="create-spot-main">
+            <OpenModalButton
+              buttonText="Firebnb your home !"
+              modalComponent={<CreateSpotModal />}
+            />
+          </div>
+        )}
+        {isLoaded && (
+          <>
+            <div className="profile-container">
+              <ProfileButton user={sessionUser} />
+            </div>
+          </>
+        )}
+      </div>
+      <div className="breaker"></div>
+    </>
   );
 }
-
-export default Navigation;
