@@ -1,0 +1,53 @@
+.spot-card{
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    /* padding: 10px; */
+    width: 270px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 1px 5px 5px gray;
+    transition: 0.25s ease-in-out;
+    color: black;
+    padding-bottom: 10px;
+}
+.spot-card *{
+    text-decoration: none;
+    color: black;
+}
+.spot-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 2px 5px 5px rgb(146, 195, 210);
+}
+.spot-card-prev-image{
+    width: 270px;
+    height: 250px;
+    object-fit: cover;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.spot-preview-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.delete-update-div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+}
+.delete-update-div button{
+    background-color: rgb(143, 185, 156);
+    border-radius: 2px;
+    margin: 5px;
+    padding: 2px;
+}
+.delete-update-div button:hover{
+    cursor: pointer;
+}
+
+.ratings-span{
+    display: flex;
+}

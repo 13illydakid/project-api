@@ -1,18 +1,23 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { getAllSpotsThunk } from '../../store/spots';
-//import Spots from './Spots';
+import Spot from './Spot';
 import './GetAllSpots.css';
-// import { useHistory } from 'react-router-dom';
+
 export default function GetAllSpots() {
     const dispatch = useDispatch();
-    // const history = useHistory();
-    const obj = useSelector(state => state.spots.allSpots);
+    const history = useHistory();
+    const spots = useSelector(state => state.spots.allSpots);
 
     useEffect(() => {
         dispatch(getAllSpotsThunk())
     }, [dispatch]);
 
+    let spotsValues = Object.values(spots);
+    if (spotsValues.length === 0) {
+        return null;
+    }
     // const array = Object.values(obj);
     // if (array.length === 0) {
     //     return null;
@@ -21,12 +26,12 @@ export default function GetAllSpots() {
     // }
     return (
         <div id='spots-outer'>
-        <div id='spots-inner'>
+            <div id='spots-inner'>
 
-        {obj && Object.values(obj).map(spot=>(
-            <SpotTile key={spot.id} spot={spot} />
-        ))}
-        </div>
+                {spots && Object.values(spots).map(spot => (
+                    <Spot key={spot.id} spot={spot} />
+                ))}
+            </div>
         </div>
     )
 }
