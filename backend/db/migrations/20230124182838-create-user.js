@@ -18,13 +18,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-        // onDelete: "CASCADE"
-      },
+      // ownerId: {
+      //   allowNull: false,
+      //   autoIncrement: true,
+      //   primaryKey: true,
+      //   type: Sequelize.INTEGER
+      //   // onDelete: "CASCADE"
+      // },
       firstName: {
         type: Sequelize.STRING(30),
         allowNull: false
