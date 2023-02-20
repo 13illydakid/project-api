@@ -72,6 +72,11 @@ export default function ProfileButton({ user }) {
                 <button>My Spots</button>
               </div>
             </NavLink>
+            <NavLink exact to="/">
+              <div className="menu-button">
+                <button>Home</button>
+              </div>
+            </NavLink>
             <div className="menu-button">
               <button id="demouser" style={{ color: 'red' }} onClick={logout}>
                 Log Out

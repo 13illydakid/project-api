@@ -3,9 +3,9 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getSingleSpotThunk, removeSpotThunk } from '../../store/spots';
 import EditSpot from '../EditSpot';
-import { getAllSpotsThunk, getUserSpotsThunk } from '../../store/spots';
+import { getAllSpotsThunk, removeSpotThunk } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
-import RemoveSpot from '../RemoveSpot';
+// import RemoveSpot from '../RemoveSpot';
 import noImg from '../Images/noImg.jpg';
 import './GetUserSpots.css'
 
@@ -24,7 +24,7 @@ export default function GetUserSpots() {
     );
 
     const deleteSpotClickEvent = async (spotId) => {
-        await dispatch(RemoveSpot(spotId));
+        await dispatch(removeSpotThunk(spotId));
         dispatch(getAllSpotsThunk());
         history.push('/current');
     };
@@ -82,7 +82,7 @@ export default function GetUserSpots() {
                                         <div className="allspot-country">{spot.country}</div>
                                         <div className="user-price-container">
                                             <div className="allspot-price">
-                                                <span>{`$${spot.price}`}</span> night
+                                                <span>{`${spot.price}`}</span> night
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@ export default function GetUserSpots() {
                         );
                     })
                 ) : (
-                    <d1 className='notHosting'>You're not hosting spots</d1>
+                    <d1 className='notHosting'>You have Zero Spots.</d1>
                 )}
             </div>
         </>

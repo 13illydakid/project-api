@@ -1,53 +1,82 @@
-/* .spot-card{
-    background-color: rgb(255, 255, 255);
-    position: relative; */
-    /* padding: 10px; */
-    /* width: 270px;
-    border-radius: 8px;
-    text-decoration: none;
-    box-shadow: 1px 5px 5px gray;
-    transition: 0.25s ease-in-out;
-    color: black;
-    padding-bottom: 10px;
-}
-.spot-card *{
-    text-decoration: none;
-    color: black;
-}
-.spot-card:hover{
-    transform: translateY(-3px);
-    box-shadow: 2px 5px 5px rgb(146, 195, 210);
-}
-.spot-card-prev-image{
-    width: 270px;
-    height: 250px;
-    object-fit: cover;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
-}
-
-.spot-preview-info{
+.spot-card-container {
+    position: relative;
+    width: 200px;
+    height: 275px;
+    border-radius: 0px;
+    overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
-}
+    transition: all 0.3s ease-in-out; /* add transition property */
+  }
 
-.delete-update-div{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+  .image-container {
     width: 100%;
-}
-.delete-update-div button{
-    background-color: rgb(143, 185, 156);
-    border-radius: 2px;
-    margin: 5px;
-    padding: 2px;
-}
-.delete-update-div button:hover{
-    cursor: pointer;
-}
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
 
-.ratings-span{
+  .spot-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .rating-container {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    padding: 5px;
+    border-radius: 0 10px 0 10px;
+  }
+
+
+
+  .text-container {
+    position: absolute;
+    bottom: 0;
+    width: 180px;
+    padding: 10px;
+    background-color: #d2faca;
+    text-align: left;
+    z-index: 0;
+  }
+
+  .spot-city {
+    font-size: 14px;
+    font-weight: bold;
+    color: #334454;
+    margin: 0 0 6px;
+  }
+
+
+
+  .spot-card-container .fa-eye,
+  .spot-card-container .fa-comment-alt,
+  .spot-card-container .fa-download {
+    margin-right: 10px;
+  }
+
+  .spot-card-container .fas {
+    color: #fff;
+  }
+
+  .spot-card-container .container__info {
+    position: absolute;
+    bottom: 60%;
     display: flex;
-} */
+    align-items: flex-end;
+    padding: 10px;
+    color: #fff;
+    z-index: 1;
+  }
+
+  .spot-card-container:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .spot-card-container:hover .text-container {
+    transform: translateY(0%);
+    opacity: 1;
+  }

@@ -28,6 +28,9 @@ function App() {
           <Route exact path="/">
             <GetAllSpots />
           </Route>
+          <Route path="/spots/:spotId">
+            <GetSingleSpot />
+          </Route>
           <Route path="/spots/new">
             <CreateSpot />
           </Route>
@@ -42,9 +45,6 @@ function App() {
           </Route>
           <Route path="/">
             <RemoveSpot />
-          </Route>
-          <Route path="/spots/:spotId">
-            <GetSingleSpot />
           </Route>
           <Route><PageNotFound /></Route>
         </Switch>
