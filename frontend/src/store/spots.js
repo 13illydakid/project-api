@@ -1,8 +1,9 @@
 import { csrfFetch } from './csrf';
 
 // actions
-const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT';
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
+const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT';
+const GET_USER_SPOTS = 'spots/GET_USER_SPOTS';
 const CREATE_SPOT = 'spots/CREATE_SPOT';
 const EDIT_SPOT = 'spots/EDIT_SPOT';
 const REMOVE_SPOT = 'spots/REMOVE_SPOT';
@@ -10,15 +11,21 @@ const ADD_IMAGE = 'spots/ADD_IMAGE';
 
 // action creators
 
+export const getAllSpots = (spots) => {
+    return {
+        type: GET_ALL_SPOTS,
+        spots
+    }
+}
 export const getSingleSpot = (spot) => {
     return {
         type: GET_SINGLE_SPOT,
         spot
     }
 }
-export const getAllSpots = (spots) => {
+export const getUserSpots = (spots) => {
     return {
-        type: GET_ALL_SPOTS,
+        type: GET_USER_SPOTS,
         spots
     }
 }
@@ -57,6 +64,14 @@ export const addImage = (spotId, url, preview) => {
 // }
 
 // thunks
+export const getAllSpotsThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/spots');
+    if(res.ok){
+        const spots = await res.json();
+        dispatch(getAllSpots(spots));
+        return spots;
+    }
+}
 export const getSingleSpotThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`);
     if(res.ok){
@@ -65,12 +80,12 @@ export const getSingleSpotThunk = () => async (dispatch) => {
         return spot;
     }
 }
-export const getAllSpotsThunk = () => async (dispatch) => {
-    const res = await csrfFetch('/api/spots');
+export const getUserSpotsThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/spots/current');
     if(res.ok){
-        const spots = await res.json();
-        dispatch(getAllSpots(spots));
-        return spots;
+        const spot = await res.json();
+        dispatch(getUserSpots(spot));
+        return spot;
     }
 }
 export const createSpotThunk = (spot) => async (dispatch) => {
@@ -125,22 +140,62 @@ export const addImageThunk = (spotId, url, preview) => async (dispatch) => {
 // reducer
 const initialState = {
     singleSpot: {},
-    allSpots: {}
+    allSpots: {},
+    userSpots: {}
 }
 
-export const spotsReducer = ( state = initialState, action ) => {
+const spotsReducer = ( state = initialState, action ) => {
     //const newState;
     let newState;
     switch(action.type){
-        case GET_SINGLE_SPOT: {
-            newState = { ...state }
-            newState.singleSpot = action.spot
-            return newState
-        }
         case GET_ALL_SPOTS: {
             newState = { ...state }
             const normalizedSpots = {};
-
+            action.spots.Spots.forEach((spot)=>{
+                normalizedSpots[spot.id] = spot
+            });
+            newState.allSpots = normalizedSpots;
+            // newState.singleSpot = {};
+            return newState;
+        }
+        case GET_SINGLE_SPOT: {
+            newState = { ...state, singleSpot: { ...state.allSpots } }
+            newState.singleSpot = action.spot
+            return newState
+        }
+        case GET_USER_SPOTS: {
+            newState = { ...state };
+            const normalizedSpots = {};
+            action.spots.Spots.forEach((spot)=>{
+                normalizedSpots[spot.id] = spot
+            });
+            newState.userSpots = normalizedSpots;
+            return newState;
+        }
+        case CREATE_SPOT: {
+            newState = {...state, allSpots: {...state.allSpots}}
+            newState.allSpots[action.spot.id] = action.spot
+            return newState;
+        }
+        case EDIT_SPOT: {
+            newState = { ...state }
+            newState.allSpots = { ...state, allSpots: { ...state.allSpots } }
+            newState.allSpots[action.spot.id] = action.spot
+            newState.spots = { ...state, spots: { ...state.spots } }
+            newState.spots[action.spot.id] = action.spot
+            return newState
+        }
+        case REMOVE_SPOT: {
+            newState = { ...state }
+            delete newState.allSpots[action.spotId]
+            return newState;
+        }
+        case ADD_IMAGE: {
+            newState = { ...state }
+            newState.singleSpot = { ...state.singleSpot, [action.spotId.SpotImages]: [action.spotId.SpotImages].push(action.url) }
+            return newState;
         }
     }
 }
+
+export default spotsReducer;
