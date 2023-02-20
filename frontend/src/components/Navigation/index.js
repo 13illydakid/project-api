@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import './Navigation.css';
 import elleBnB_Logo from '../images/elleBnB_Logo.jpg';
-import CreateSpotModal from '../CreateSpotModal';
+import CreateSpot from '../CreateSpot';
 import OpenModalButton from '../OpenModalButton';
 import DemoUser from '../DemoUser';
+import './Navigation.css';
 export default function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -36,7 +36,7 @@ export default function Navigation({ isLoaded }) {
           <div className="create-spot-main">
             <OpenModalButton
               buttonText="Firebnb your home !"
-              modalComponent={<CreateSpotModal />}
+              modalComponent={<CreateSpot />}
             />
           </div>
         )}

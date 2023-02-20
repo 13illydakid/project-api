@@ -1,6 +1,12 @@
-.div-form {
+/* .div-form {
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+.formBox label {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
 }

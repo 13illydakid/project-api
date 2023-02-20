@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { editSpotThunk, getSingleSpotThunk } from '../../store/spots';
 import { useModal } from '../../context/Modal';
-import './EditSpot.css';
 
 export default function EditSpot() {
   // const user = useSelector(state => state.session.user)
