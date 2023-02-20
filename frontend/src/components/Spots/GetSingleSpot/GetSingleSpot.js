@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSingleSpotTK, acResetSpots } from '../../store/spots';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import './Spot.css';
+import './GetSingleSpot.css';
 import SpotReviews from '../Reviews/SpotReviews';
 import OpenModalButton from '../OpenModalButton';
 import CreateReviewsModal from '../CreateReviewsModal';

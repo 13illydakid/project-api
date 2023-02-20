@@ -50,7 +50,7 @@ const submitNow = (e) => {
       });
 
 
-  };
+
 
 //   const handleCancelClick = (e) => {
 //     e.preventDefault();
