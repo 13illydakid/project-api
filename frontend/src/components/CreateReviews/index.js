@@ -4,7 +4,7 @@ import { addReviewThunk } from '../../store/reviews';
 import { getSpotReviewsThunk } from '../../store/reviews';
 import { useModal } from '../../context/Modal'
 import './CreateReviews.css';
-export default function CreateReviews({ spotId }) {
+export default function CreateReviews() {
     const dispatch = useDispatch();
     const [review, setReview] = useState("");
     const [stars, setStars] = useState(5);
