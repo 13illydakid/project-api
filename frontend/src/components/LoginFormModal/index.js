@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './LoginForm.css';
 
-function LoginFormModal() {
+export default function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
@@ -65,4 +65,4 @@ function LoginFormModal() {
   );
 }
 
-export default LoginFormModal;
+// export default LoginFormModal;

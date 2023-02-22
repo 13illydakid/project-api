@@ -104,7 +104,7 @@ export const editReviewThunk = (reviewId, review) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'applicaiton/json'
+            'Content-Type': 'application/json'
         }, body: JSON.stringify(review)
     });
     if(res.ok){
@@ -176,8 +176,10 @@ const reviewsReducer = (state=initialState, action) => {
             newState.spot = {};
             return newState;
         }
-        default:
-            return state;
+        default: {
+            newState = { ...state }
+            return newState;
+        }
     }
 }
 

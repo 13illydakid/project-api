@@ -7,7 +7,7 @@ import SignupFormModal from '../SignupFormModal';
 import { NavLink, useHistory } from 'react-router-dom';
 import DemoUser from '../DemoUser';
 
-export default function ProfileButton({ user }) {
+export default function ProfileButton( user ) {
   const history = useHistory()
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);

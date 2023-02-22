@@ -195,8 +195,10 @@ const spotsReducer = ( state = initialState, action ) => {
             newState.singleSpot = { ...state.singleSpot, [action.spotId.SpotImages]: [action.spotId.SpotImages].push(action.url) }
             return newState;
         }
-        default:
-            return state;
+        default: {
+            newState = { ...state }
+            return newState;
+        }
     }
 }
 

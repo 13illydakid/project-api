@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import { useModal } from '../../context/Modal';
 import './SignupForm.css';
-function SignupFormPage() {
+function SignUpFormModal() {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -125,4 +125,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignUpFormModal;

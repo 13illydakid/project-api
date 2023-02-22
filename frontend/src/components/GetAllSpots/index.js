@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllSpotsThunk } from '../../store/spots';
+// import { getAllSpotsThunk } from '../../store/spots';
 import Spot from '../Spot';
 import './GetAllSpots.css';
 
@@ -9,9 +9,9 @@ export default function GetAllSpots() {
     // const history = useHistory();
     const spots = useSelector(state => state.spots.allSpots);
 
-    useEffect(() => {
-        dispatch(getAllSpotsThunk())
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getAllSpotsThunk())
+    // }, [dispatch]);
 
     let spotsValues = Object.values(spots);
     if (spotsValues.length === 0) {
@@ -25,9 +25,9 @@ export default function GetAllSpots() {
     // }
     return (
         <>
-          <div className="wrapper-center">
-            <div className="allspot-container">
-              {Object.values(spotsValues).map((spot) => (
+          <div className="outer">
+            <div className="inner">
+              {spotsValues.map((spot) => (
                 <Spot key={spot.id} spot={spot} />
               ))}
             </div>
