@@ -1,120 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import { addReviewThunk } from '../../store/reviews';
+import { getSpotReviewsThunk } from '../../store/reviews';
 import { useModal } from '../../context/Modal'
-import { getSingleSpotThunk } from '../../store/spots';
 import './CreateReviews.css';
 export default function CreateReviews({ spotId }) {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const { closeModal } = useModal();
-    const [url, setUrl] = useState('');
-    const [review, setReview] = useState('');
+    const [review, setReview] = useState("");
     const [stars, setStars] = useState(5);
     const [errors, setErrors] = useState([]);
-    const [hasSubmitted, setHasSubmitted] = useState(false);
-    const [rating, setRating] = useState(0);
+    const { closeModal } = useModal();
+    const [disableButton, setDisableButton] = useState(true)
 
-    const currentUser = useSelector((state) => state.session.user);
-    const {id} = useParams();
-    const handleStarClick = (index) => {
-        setRating(index + 1)
-      }
+    const user = useSelector(state => state.session.user)
+    const spotId = useSelector(state => state.spots.singleSpot.id)
+
     useEffect(() => {
-        if (currentUser) setErrors([]);
-        else setErrors(['Log in to leave a review']);
-    }, [currentUser]);
-    const updateReview = (e) => setReview(e.target.value)
-    const updateStars = (e) => setStars(e.target.value)
-    const updateURL = (e) => setUrl(e.target.value)
+      if (review.length >= 10 && stars.length)  setDisableButton(false)
+    }, [review, stars])
+
+    useEffect(() => {
+      if (review.length < 10 || !stars.length)  setDisableButton(true)
+    }, [review, stars])
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrors([]);
-        setHasSubmitted(true);
+      e.preventDefault();
 
-        const errorsArr = [];
-        if (!review.length || review.length > 150)
-            errorsArr.push('Enter a valid review fewer than 150 characters long');
+      const payload = {
+        userId: user.id,
+        spotId: spotId,
+        review: review,
+        stars: Number(stars)
+      }
 
-        setErrors(errorsArr);
-        if (errorsArr.length) return;
-        const reviewInfo = { review, stars, url };
+      await dispatch(addReviewThunk(payload, spotId));
 
-        const newReview = await dispatch(
-            addReviewThunk(reviewInfo, spotId, currentUser)
-        ).catch(async (res) => {
-            const message = await res.json();
-            const messageErrors = [];
+      await dispatch(getSpotReviewsThunk(spotId));
 
-            if (message) {
-                messageErrors.push(message.error);
-                errorsArr.push(message.error);
-                setErrors(messageErrors);
-            }
-        });
-        if (newReview && !url.length) {
-            closeModal();
-            dispatch(getSingleSpotThunk(spotId))
-            history.push(`/spots/${spotId}`);
-        }
+      closeModal();
 
     };
-    const handleCancelClick = (e) => {
-        e.preventDefault()
 
-
-    }
     return (
-        <div>
-            <div className="modalHead">Leave a Review</div>
-
-            <div>
-                {hasSubmitted &&
-                    errors &&
-                    errors.map((error) => <div style={{ color: 'red' }} key={error}>{error}</div>)}
-            </div>
-
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
-                <input
-                    type={'text'}
-                    placeholder={'Leave a review'}
-                    required
-                    value={review}
-                    onChange={updateReview}
-                />
-                <input
-                    type={'number'}
-                    placeholder={'Stars'}
-                    required
-                    value={stars}
-                    onChange={updateStars}
-                    readOnly
-                />
-                <div className="star-rating">
-        {Array.from({ length: 5 }, (_, i) => (
-          <i
-            key={i}
-            className={`fa fa-star ${i < rating ? "selected" : ""}`}
-            onClick={() => handleStarClick(i)}
-          />
-        ))}
-      </div>
-                <input
-                    type={'text'}
-                    placeholder={'Review image (optional)'}
-                    value={url}
-                    onChange={updateURL}
-                />
-                <button type="submit">Submit</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
-                <button>Create Review</button>
-            </form>
-        </div>
+      <>
+        <h1>How was your stay?</h1>
+        <form onSubmit={handleSubmit} className='review-form'>
+          <ul>
+            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>
+          <label>
+            <textarea
+              type="text"
+              rows="5"
+              cols="33"
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              placeholder='Just a quick review.'
+              required
+              className="review-textbox"
+            />
+          </label>
+          <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" onChange={(e) => setStars(e.target.value)} />
+            <label for="star5" title="text"></label>
+            <input type="radio" id="star4" name="rate" value="4" onChange={(e) => setStars(e.target.value)} />
+            <label for="star4" title="text"></label>
+            <input type="radio" id="star3" name="rate" value="3" onChange={(e) => setStars(e.target.value)} />
+            <label for="star3" title="text"></label>
+            <input type="radio" id="star2" name="rate" value="2" onChange={(e) => setStars(e.target.value)} />
+            <label for="star2" title="text"></label>
+            <input type="radio" id="star1" name="rate" value="1" onChange={(e) => setStars(e.target.value)} />
+            <label for="star1" title="text"></label>
+          </div>
+          <button type="submit" disabled={disableButton}>Submit Your Review</button>
+        </form>
+      </>
     );
-};
+  }

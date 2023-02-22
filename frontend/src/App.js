@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-// import SignUpFormModal from "./components/SignUpFormModal";
+import SignupFormModal from "./components/SignupFormModal";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GetAllSpots from "./components/Spots/GetAllSpots";
@@ -30,9 +30,9 @@ function App() {
           <Route exact path="/">
             <GetAllSpots />
           </Route>
-          {/* <Route path="/signup">
-            <SignUpFormModal />
-          </Route> */}
+          <Route exact path="/signup">
+            <SignupFormModal />
+          </Route>
           <Route exact path="/spots/new">
             <CreateSpot />
           </Route>
