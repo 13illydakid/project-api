@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useModal } from '../../context/Modal';
-import { createSpotThunk } from '../../store/spots';
+import { useModal } from '../../../context/Modal';
+import { createSpotThunk } from '../../../store/spots';
 import './CreateSpot.css';
 
 export default function CreateSpot() {
