@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import './ProfileButton.css'
 
-export default function ProfileButton({ user} ) {
+function ProfileButton({ user} ) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -61,3 +61,5 @@ export default function ProfileButton({ user} ) {
     </>
   );
 }
+
+export default ProfileButton;

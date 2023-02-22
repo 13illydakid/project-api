@@ -12,7 +12,7 @@ import EditSpot from "./components/Spots/EditSpot";
 // import RemoveSpot from "./components/RemoveSpot";
 // import UserReviews from './components/Reviews/UserReviews';
 // import LoginFormModal from "./components/LoginFormModal/index";
-import PageNotFound from './components/PageNotFound';
+// import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
           <Route exact path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
-          <Route><PageNotFound /></Route>
+          <Route>Page Not Found </Route>
         </Switch>
       )}
       <Footer />

@@ -2,11 +2,11 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
 
-export default function OpenModalButton({
+function OpenModalButton({
   modalComponent, // component to render inside the modal
   buttonText, // text of the button that opens the modal
   onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
-  onModalClose, // optional: callback function that will be called once the modal is closed
+  onModalClose // optional: callback function that will be called once the modal is closed
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
@@ -16,5 +16,9 @@ export default function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button style={{border:'none',fontSize:'15px'}} onClick={onClick}>{buttonText}</button>;
+  return (
+    <button onClick={onClick}>{buttonText}</button>
+  );
 }
+
+export default OpenModalButton;

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserSpotsThunk } from '../../../store/spots';
-import Spot from './Spot'
+import SpotSingle from './Spot'
 import './GetUserSpots.css'
 
 export default function GetUserSpots() {
@@ -18,7 +18,7 @@ export default function GetUserSpots() {
   return (
     <section id='current-spots'>
       <div id='current-spot-tiles'>
-        {Object.values(spots).map(spot => <Spot spot={spot} key={spot.id}/>)}
+        {Object.values(spots).map(spot => <SpotSingle spot={spot} key={spot.id}/>)}
       </div>
     </section>
   )

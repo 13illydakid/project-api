@@ -7,7 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 // import DemoUser from '../DemoUser';
 import './Navigation.css';
-export default function Navigation({ isLoaded }) {
+function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const title = useSelector(state => state.title);
 
@@ -46,3 +46,5 @@ export default function Navigation({ isLoaded }) {
     </ul>
   );
 }
+
+export default Navigation;

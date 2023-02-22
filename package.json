@@ -1,7 +1,7 @@
 {
   "name": "authentication",
   "version": "1.0.0",
-  "description": "## Database Schema Design",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "render-postbuild": "npm run build --prefix frontend",
@@ -13,15 +13,8 @@
     "start": "npm start --prefix backend",
     "build": "npm run build --prefix backend"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/13illydakid/project-api.git"
-  },
+
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/13illydakid/project-api/issues"
-  },
-  "homepage": "https://github.com/13illydakid/project-api#readme"
+  "license": "ISC"
 }

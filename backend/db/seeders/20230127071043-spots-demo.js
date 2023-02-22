@@ -1,16 +1,17 @@
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-options.tableName = 'Spots'
+// options.tableName = 'Spots'
 
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = 'Spots';
-    return queryInterface.bulkInsert(
-      options,
+    return queryInterface.bulkInsert(options,
       [
         {
           ownerId: 1,
@@ -28,7 +29,6 @@ module.exports = {
           ownerId: 2,
           address: '1515 Eren Rampage Street',
           city: 'Liberio',
-          // state: 'Destroyed',
           state: 'Trampled',
           country: 'Marley',
           lat: 114.1694,
@@ -49,16 +49,14 @@ module.exports = {
           description: 'Abandoned castle used temporarily by members of the Survey Corps. Beware of Beast Titan.',
           price: 17
         },
-      ], options);
+      ], {});
   },
 
   async down(queryInterface, Sequelize) {
+    options.tableName = 'Spots';
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      options, {
-      id: {
-        [Op.in]: [1, 2, 3]
-      },
+    return queryInterface.bulkDelete(options, {
+      id: { [Op.in]: [1, 2, 3] },
     }, {});
   }
 };

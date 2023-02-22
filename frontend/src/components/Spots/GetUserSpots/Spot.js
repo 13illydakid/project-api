@@ -5,7 +5,7 @@ import OpenModalButton from '../../OpenModalButton';
 import './Spot.css'
 
 
-export default function Spot({ spot }) {
+export default function SpotSingle({ spot }) {
 
     const price = Number.parseFloat(spot.price).toFixed(2)
     let avgRating = Number.parseFloat(spot.avgRating).toFixed(1);
