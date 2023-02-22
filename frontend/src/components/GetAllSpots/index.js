@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getAllSpotsThunk } from "../../../store/spots";
-import Spot from '../Spot';
+import { getAllSpotsThunk } from "../../store/spots";
+import SpotTile from './SpotTile';
 import './GetAllSpots.css';
 
 export default function GetAllSpots() {
   const dispatch = useDispatch();
-  const spots = useSelector((state)=> state.spots.allSpots);
-  useEffect(()=> {
+  const spots = useSelector((state) => state.spots.allSpots);
+  useEffect(() => {
     dispatch(getAllSpotsThunk())
   }, [dispatch]);
 
-  if(!Object.values(spots).length === 0){
+  if (!Object.values(spots).length === 0) {
     return null;
   }
 
@@ -20,7 +20,7 @@ export default function GetAllSpots() {
 
   return (
     <section id="landing-page">
-      <div id="each-spot">{ spotsObj.map((spot)=> <Spot spot={spot} />) }</div>
+      <div id="each-spot">{spotsObj.map((spot) => <SpotTile spot={spot} />)}</div>
     </section>
   )
 }

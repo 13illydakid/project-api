@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 // import noImg from '../Images/noImg.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleSpotThunk } from '../../../store/spots';
-import { getSpotReviewsThunk } from '../../../store/reviews';
-import { resetSpot } from '../../../store/spots';
-import SpotImages from '../Spot';
+import { getSingleSpotThunk } from '../../store/spots';
+import { getSpotReviewsThunk } from '../../store/reviews';
+import { resetSpot } from '../../store/spots';
+import SpotImages from './SpotImages';
 import { useParams } from 'react-router-dom';
 import './GetSingleSpot.css';
 import GetReviews from './GetReviews';
-import OpenModalButton from '../../OpenModalButton';
-import CreateReviews from '../../CreateReviews';
+import OpenModalButton from '../OpenModalButton';
+import CreateReviews from '../CreateReviews';
 
 export default function GetSingleSpot() {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ export default function GetSingleSpot() {
   }
   let avgRating = (counter/spotReviewArr.length).toFixed(1);
   // let avgRating = Math.floor(counter/spotReviewArr.length);
-  if(avgRating == 0){
+  if(avgRating === 0){
     avgRating = 'New';
   }
 
@@ -54,7 +54,7 @@ export default function GetSingleSpot() {
 
   let existingData;
   if(user){
-    existingData = spotReviewArr.filter((match)=> match.userId == user.id);
+    existingData = spotReviewArr.filter((match)=> match.userId === user.id);
   }
   // let previewImages;
   // let displayImages = [];

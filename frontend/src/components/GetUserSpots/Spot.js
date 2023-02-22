@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom'
 import RemoveSpot from '../RemoveSpot';
-import OpenModalButton from '../../OpenModalButton';
+import OpenModalButton from '../OpenModalButton';
 import './Spot.css'
 
 

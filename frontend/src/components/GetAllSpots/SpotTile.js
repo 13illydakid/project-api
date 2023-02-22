@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import './Spot.css';
 
-export default function Spot({ spot }) {
+export default function SpotTile({ spot }) {
   // const calculator = (obj, key, i) => {
   //   return Number.parseFloat(obj[key]).toFixed(i);
   // }

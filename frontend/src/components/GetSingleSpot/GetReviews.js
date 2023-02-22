@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSpotReviewsThunk } from "../../../store/reviews";
+import { getSpotReviewsThunk } from "../../store/reviews";
 import './GetReviews.css';
-import OpenModalButton from "../../OpenModalButton";
+import OpenModalButton from "../OpenModalButton";
 import DeleteReview from "./DeleteReview";
 
 export default function GetReviews({ spotId }) {

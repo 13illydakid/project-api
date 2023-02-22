@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useModal } from '../../../context/Modal';
-import { createSpotThunk } from '../../../store/spots';
+import { useModal } from '../../context/Modal';
+import { createSpotThunk } from '../../store/spots';
 import './CreateSpot.css';
 
 export default function CreateSpot() {
@@ -53,7 +53,7 @@ export default function CreateSpot() {
       <form className="create-spot-form" onSubmit={handleSubmit}>
         {/* <div>Please Fill Below!</div> */}
         <div>
-            <h4>Create your Spot</h4>
+          <h4>Create your Spot</h4>
           {/* <div>Create your spot</div> */}
           <ul>
             {errors &&

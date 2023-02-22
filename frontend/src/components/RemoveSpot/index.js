@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeSpotThunk, getUserSpotsThunk } from "../../../store/spots";
-import { useModal } from "../../../context/Modal";
+import { removeSpotThunk, getUserSpotsThunk } from "../../store/spots";
+import { useModal } from "../../context/Modal";
 import './RemoveSpot.css'
 // import { useEffect } from "react";
 

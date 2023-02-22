@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { editSpotThunk } from '../../../store/spots';
-import { getSingleSpotThunk } from '../../../store/spots';
+import { editSpotThunk } from '../../store/spots';
+import { getSingleSpotThunk } from '../../store/spots';
 import './EditSpot.css'
 
 export default function EditSpot() {

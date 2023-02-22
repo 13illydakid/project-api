@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getSpotReviewsThunk, removeReviewThunk } from "../../../store/reviews";
-import { useModal } from "../../../context/Modal";
+import { getSpotReviewsThunk, removeReviewThunk } from "../../store/reviews";
+import { useModal } from "../../context/Modal";
 import './DeleteReview.css';
 
 export default function DeleteReview({ reviewId, spotId }) {

@@ -4,15 +4,16 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormModal from "./components/SignupFormModal";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import GetAllSpots from "./components/Spots/GetAllSpots";
-import GetSingleSpot from "./components/Spots/GetSingleSpot";
-import GetUserSpots from "./components/Spots/GetUserSpots";
-import CreateSpot from "./components/Spots/CreateSpot";
-import EditSpot from "./components/Spots/EditSpot";
+import GetAllSpots from "./components/GetAllSpots";
+import GetSingleSpot from "./components/GetSingleSpot";
+import GetUserSpots from "./components/GetUserSpots";
+import CreateSpot from "./components/CreateSpot";
+import EditSpot from "./components/EditSpot";
 // import RemoveSpot from "./components/RemoveSpot";
 // import UserReviews from './components/Reviews/UserReviews';
 // import LoginFormModal from "./components/LoginFormModal/index";
 // import PageNotFound from './components/PageNotFound';
+import DemoUser from "./components/DemoUser";
 import Footer from './components/Footer';
 
 function App() {
@@ -21,31 +22,29 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-//comment
+  //comment
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
-            <GetAllSpots />
-          </Route>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <SignupFormModal />
           </Route>
-          <Route exact path="/spots/new">
+          <Route path="/spots/new">
             <CreateSpot />
           </Route>
-          <Route exact path="/spots/current">
+          <Route><DemoUser /> </Route>
+          <Route path="/">
+            <GetAllSpots />
+          </Route>
+          <Route path="/spots/current">
             <GetUserSpots />
           </Route>
           <Route path="/spots/:spotId/edit">
             <EditSpot />
           </Route>
-          {/* <Route exact path="/myreviews">
-            <UserReviews />
-          </Route> */}
-          <Route exact path="/spots/:spotId">
+          <Route path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
           <Route>Page Not Found </Route>
