@@ -1,4 +1,4 @@
-.spot-card-container {
+.tile {
   position: relative;
   width: 200px;
   height: 275px;
@@ -9,31 +9,21 @@
   /* add transition property */
 }
 
-.image-container {
+.thumbnail-container {
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
 }
 
-.spot-image {
+.thumbnail {
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
 
-.rating-container {
-  position: absolute;
-  top: 2px;
-  right: 0;
-  padding: 5px;
-  border-radius: 0 10px 0 10px;
-}
-
-
-
-.text-container {
+.spot-name {
   position: absolute;
   bottom: 0;
   width: 180px;
@@ -43,26 +33,37 @@
   z-index: 0;
 }
 
+.spot-stars {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  padding: 5px;
+  border-radius: 0 10px 0 10px;
+}
+
+
+
+/*
 .spot-city {
   font-size: 14px;
   font-weight: bold;
   color: #334454;
   margin: 0 0 6px;
-}
+} */
 
 
 
-.spot-card-container .fa-eye,
-.spot-card-container .fa-comment-alt,
-.spot-card-container .fa-download {
+.tile .fa-eye,
+.tile .fa-comment-alt,
+.tile .fa-download {
   margin-right: 10px;
 }
 
-.spot-card-container .fas {
+.tile .fas {
   color: #fff;
 }
 
-.spot-card-container .container__info {
+.tile .tile__info {
   position: absolute;
   bottom: 60%;
   display: flex;
@@ -72,12 +73,12 @@
   z-index: 1;
 }
 
-.spot-card-container:hover {
+.tile:hover {
   background-color: #f2f2f2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.spot-card-container:hover .text-container {
+.tile:hover .spot-name {
   transform: translateY(0%);
   opacity: 1;
 }

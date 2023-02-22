@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { getAllSpots, removeSpotThunk } from '../../store/spots';
-import EditSpot from '../EditSpot';
-import OpenModalButton from '../OpenModalButton';
-import { useModal } from '../../context/Modal';
+import { getAllSpots, removeSpotThunk } from '../../../store/spots';
+import EditSpot from '../../EditSpot';
+import OpenModalButton from '../../OpenModalButton';
+import { useModal } from '../../../context/Modal';
 // import './RemoveSpot.css';
 
 export default function RemoveSpot(spotId) {
