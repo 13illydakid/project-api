@@ -46,7 +46,7 @@ export default function GetSingleSpot() {
   }
   let avgRating = (counter/spotReviewArr.length).toFixed(1);
   // let avgRating = Math.floor(counter/spotReviewArr.length);
-  if(avgRating == 0){
+  if(avgRating === 0){
     avgRating = 'New';
   }
 
@@ -54,7 +54,7 @@ export default function GetSingleSpot() {
 
   let existingData;
   if(user){
-    existingData = spotReviewArr.filter((match)=> match.userId == user.id);
+    existingData = spotReviewArr.filter((match)=> match.userId === user.id);
   }
   // let previewImages;
   // let displayImages = [];

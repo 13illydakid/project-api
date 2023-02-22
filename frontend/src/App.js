@@ -30,22 +30,19 @@ function App() {
           <Route exact path="/">
             <GetAllSpots />
           </Route>
-          <Route exact path="/signup">
-            <SignupFormModal />
-          </Route>
-          <Route exact path="/spots/new">
+          <Route path="/spots/new">
             <CreateSpot />
           </Route>
-          <Route exact path="/spots/current">
+          <Route path="/signup">
+            <SignupFormModal />
+          </Route>
+          <Route path="/spots/current">
             <GetUserSpots />
           </Route>
           <Route path="/spots/:spotId/edit">
             <EditSpot />
           </Route>
-          {/* <Route exact path="/myreviews">
-            <UserReviews />
-          </Route> */}
-          <Route exact path="/spots/:spotId">
+          <Route path="/spots/:spotId">
             <GetSingleSpot />
           </Route>
           <Route><PageNotFound /></Route>

@@ -81,7 +81,7 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     if(res.ok){
         const payload = await res.json();
         dispatch(getAllSpots(payload));
-        // return payload;
+        return payload;
     }
 }
 export const getSingleSpotThunk = (spotId) => async (dispatch) => {
@@ -89,7 +89,7 @@ export const getSingleSpotThunk = (spotId) => async (dispatch) => {
     if(res.ok){
         const payload = await res.json();
         dispatch(getSingleSpot(payload));
-        // return payload;
+        return payload;
     }
 }
 export const createSpotThunk = (data) => async (dispatch) => {
@@ -137,7 +137,7 @@ export const getUserSpotsThunk = () => async (dispatch) => {
     if(res.ok){
         const payload = await res.json();
         dispatch(getUserSpots(payload));
-        // return payload;
+        return payload;
     }
 }
 
@@ -160,7 +160,7 @@ export const editSpotThunk = (data, spotId) => async (dispatch) => {
     if(res.ok){
         const payload = await res.json();
         dispatch(createSpot(payload));
-        // return payload;
+        return payload;
     }
 }
 export const resetSpot = () => async (dispatch) => {
