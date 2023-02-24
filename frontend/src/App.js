@@ -11,7 +11,7 @@ import CreateSpot from "./components/Spots/CreateSpot";
 import EditSpot from "./components/Spots/EditSpot";
 // import RemoveSpot from "./components/RemoveSpot";
 // import UserReviews from './components/Reviews/UserReviews';
-// import LoginFormModal from "./components/LoginFormModal/index";
+import LoginFormModal from "./components/LoginFormModal";
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 
@@ -27,25 +27,30 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
-            <GetAllSpots />
+          <Route exact path="/" component={GetAllSpots}>
+            {/* <GetAllSpots /> */}
           </Route>
-          <Route path="/spots/new">
-            <CreateSpot />
+          <Route path="/login" component={LoginFormModal}>
+        {/* <LoginFormModal /> */}
+      </Route>
+          <Route path="/spots/new" component={CreateSpot}>
+            {/* <CreateSpot /> */}
           </Route>
-          <Route path="/signup">
-            <SignupFormModal />
+          <Route path="/signup" component={SignupFormModal}>
+            {/* <SignupFormModal /> */}
           </Route>
-          <Route path="/spots/current">
-            <GetUserSpots />
+          <Route path="/spots/current" component={GetUserSpots}>
+            {/* <GetUserSpots /> */}
           </Route>
-          <Route path="/spots/:spotId/edit">
-            <EditSpot />
+          <Route path="/spots/:spotId/edit" component={EditSpot}>
+            {/* <EditSpot /> */}
           </Route>
-          <Route path="/spots/:spotId">
-            <GetSingleSpot />
+          <Route path="/spots/:spotId" component={GetSingleSpot}>
+            {/* <GetSingleSpot /> */}
           </Route>
-          <Route><PageNotFound /></Route>
+          <Route component={PageNotFound}>
+            {/* <PageNotFound /> */}
+            </Route>
         </Switch>
       )}
       <Footer />

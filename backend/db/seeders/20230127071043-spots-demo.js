@@ -49,7 +49,7 @@ module.exports = {
           description: 'Abandoned castle used temporarily by members of the Survey Corps. Beware of Beast Titan.',
           price: 17
         },
-      ], options);
+      ], {});
   },
 
   async down(queryInterface, Sequelize) {

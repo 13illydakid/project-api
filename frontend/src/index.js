@@ -1,7 +1,6 @@
 // frontend/src/index.js
 import React from 'react';
 
-import './index.css';
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,6 +11,7 @@ import App from './App';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
+import './index.css';
 
 const store = configureStore();
 

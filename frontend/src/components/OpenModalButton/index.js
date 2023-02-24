@@ -16,5 +16,5 @@ export default function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button style={{border:'none',fontSize:'15px'}} onClick={onClick}>{buttonText}</button>;
+  return <button onClick={onClick}>{buttonText}</button>;
 }

@@ -38,6 +38,6 @@ module.exports = {
       spotId: {
         [Op.in]: [1, 2, 3]
       }
-    });
+    }, {});
   }
 };

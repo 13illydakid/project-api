@@ -8,6 +8,13 @@ export default function DeleteReview({ reviewId, spotId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
+
+    useEffect(() => {
+        dispatch(removeReviewThunk(reviewId));
+      }, [dispatch]);
+    useEffect(() => {
+        dispatch(getSpotReviewsThunk(spotId));
+      }, [dispatch]);
     const handleRemove = async(e) => {
         e.preventDefault();
         // return dispatch(removeReviewThunk(reviewId))
