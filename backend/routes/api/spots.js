@@ -581,6 +581,7 @@
 // module.exports = router;
 
 const express = require('express')
+const asyncHandler = require("express-async-handler");
 const router = express.Router();
 const Sequelize = require("sequelize")
 const { requireAuth } = require('../../utils/auth');
@@ -1014,10 +1015,10 @@ router.get('/', async (req,res,next) => {
 })
 
 //Delete a spot
-router.delete('/:spotId', requireAuth, checkSpot, checkSpotAuthorization, async (req,res,next) => {
+router.delete('/:spotId', requireAuth, checkSpot, checkSpotAuthorization, asyncHandler (async function (req,res,next) {
     const spot = await Spot.findByPk(req.params.spotId)
     await spot.destroy()
     res.status(200).json("Successfully deleted")
-})
+}))
 
 module.exports = router;

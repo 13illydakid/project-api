@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { getSpotReviewsThunk, removeReviewThunk } from "../../../store/reviews";
 import { useModal } from "../../../context/Modal";
 import './DeleteReview.css';
@@ -9,22 +10,22 @@ export default function DeleteReview({ reviewId, spotId }) {
     const { closeModal } = useModal();
 
 
-    useEffect(() => {
-        dispatch(removeReviewThunk(reviewId));
-      }, [dispatch]);
-    useEffect(() => {
-        dispatch(getSpotReviewsThunk(spotId));
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(removeReviewThunk(reviewId));
+    //   }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getSpotReviewsThunk(spotId));
+    //   }, [dispatch]);
+
     const handleRemove = async(e) => {
         e.preventDefault();
-        // return dispatch(removeReviewThunk(reviewId))
-        //     .then(() => closeModal())
-        // closeModal();
-        await dispatch(removeReviewThunk(reviewId))
-        await dispatch(getSpotReviewsThunk(spotId));
-
-        // dispatch(getSpotReviewsThunk(spotId))
-        closeModal()
+        useEffect(()=>{
+            dispatch(removeReviewThunk(reviewId));
+        })
+        useEffect(()=>{
+            dispatch(getSpotReviewsThunk(spotId));
+        }).then(()=>closeModal());
+        //closeModal()
     };
 
     return (
